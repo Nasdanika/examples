@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.nasdanika.examples.feature_0.1.0.qualifier.jar" id="org.nasdanika.examples.feature" version="0.1.0.qualifier">
+      <category name="org.nasdanika.examples.category"/>
+   </feature>
+   <category-def name="org.nasdanika.examples.category" label="Nasdanika Examples">
+      <description>
+         Nasdanika examples.
+      </description>
+   </category-def>
+</site>
