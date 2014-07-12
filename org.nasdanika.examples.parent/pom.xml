@@ -101,6 +101,7 @@
 	<modules>
 		<module>../org.nasdanika.examples.bank</module>
 		<module>../org.nasdanika.examples.bank.app</module>
+		<module>../org.nasdanika.examples.bank.app.tests</module>
 		<module>../org.nasdanika.examples.feature</module>
 		<module>../org.nasdanika.examples.repository</module>
 	</modules>
