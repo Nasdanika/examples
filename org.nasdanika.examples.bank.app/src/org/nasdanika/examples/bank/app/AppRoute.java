@@ -49,7 +49,7 @@ public class AppRoute implements Route {
 						htmlFactory.link("#", "Privacy Policy"))
 				.width(800);
 		
-		Navbar navBar = htmlFactory.navbar("Welcome back, Joe Doe")
+		Navbar navBar = htmlFactory.navbar("Welcome back, Joe Doe", "#")
 				.item(htmlFactory.link("#", "Accounts"), true, false)
 				.item(htmlFactory.link("#", "Customer service"), false, true);
 						
