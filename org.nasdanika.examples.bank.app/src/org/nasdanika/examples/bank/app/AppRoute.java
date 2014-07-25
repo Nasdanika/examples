@@ -8,6 +8,7 @@ import org.nasdanika.html.Accordion;
 import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.Breadcrumbs;
 import org.nasdanika.html.Button;
+import org.nasdanika.html.Carousel;
 import org.nasdanika.html.Form;
 import org.nasdanika.html.FormGroup.Status;
 import org.nasdanika.html.FormInputGroup;
@@ -81,6 +82,12 @@ public class AppRoute implements Route {
 				.style(Style.SUCCESS);
 		
 		Fragment body = htmlFactory.fragment(accordion);
+		
+		Carousel carousel = htmlFactory.carousel();
+		carousel.slide().content(htmlFactory.div("Hello").style("width", "500px").style("height", "200px").style("background", "cyan")).caption("Greeting");
+		carousel.slide().content(htmlFactory.div("World").style("width", "500px").style("height", "200px").style("background", "cyan")).caption("Addressee");
+		
+		body.content(carousel);
 		
 		// Button groups 
 		Fragment buttonGroups = htmlFactory.fragment();
