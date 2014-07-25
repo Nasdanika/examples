@@ -4,7 +4,7 @@
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
     <details key="documentation" value="This package contains bank classes.&#xD;&#xA;&#xD;&#xA;One more line."/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="SystemOfRecords">
+  <eClassifiers xsi:type="ecore:EClass" name="SystemOfRecords" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//LoginPasswordProtectionDomain">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;html>System of records is the &lt;b>root&lt;/b> of the model. Another sentence to be included &lt;I>only&lt;/I> in the detailed documentation, but not in summary.&lt;/html>"/>
     </eAnnotations>
@@ -17,17 +17,11 @@
         eType="#//Product" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="guest" eType="#//Guest"
         containment="true"/>
-    <eGenericSuperTypes eClassifier="ecore:EClass ../../org.nasdanika.cdo.security/model/security.ecore#//ProtectionDomain">
-      <eTypeArguments eClassifier="#//LoginPasswordCredentials"/>
-    </eGenericSuperTypes>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Customer" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//User">
+  <eClassifiers xsi:type="ecore:EClass" name="Customer" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//LoginPasswordHashUser">
     <eStructuralFeatures xsi:type="ecore:EReference" name="accounts" upperBound="-1"
         eType="#//Account" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="login" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passwordHash" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Account">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
@@ -89,5 +83,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="closingDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="LoginPasswordCredentials" instanceClassName="org.nasdanika.examples.bank.LoginPasswordCredentials"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Guest" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//User"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Guest" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//User">
+    <eOperations name="testOp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="p1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="p2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+  </eClassifiers>
 </ecore:EPackage>

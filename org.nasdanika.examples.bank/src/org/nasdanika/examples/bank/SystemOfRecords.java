@@ -5,6 +5,7 @@ package org.nasdanika.examples.bank;
 import org.eclipse.emf.cdo.CDOObject;
 
 import org.eclipse.emf.common.util.EList;
+import org.nasdanika.cdo.security.LoginPasswordProtectionDomain;
 import org.nasdanika.cdo.security.ProtectionDomain;
 
 /**
@@ -29,10 +30,10 @@ import org.nasdanika.cdo.security.ProtectionDomain;
  * </p>
  *
  * @see org.nasdanika.examples.bank.BankPackage#getSystemOfRecords()
- * @model superTypes="org.nasdanika.cdo.security.ProtectionDomain<org.nasdanika.examples.bank.LoginPasswordCredentials>"
+ * @model
  * @generated
  */
-public interface SystemOfRecords extends ProtectionDomain<LoginPasswordCredentials> {
+public interface SystemOfRecords extends LoginPasswordProtectionDomain {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
