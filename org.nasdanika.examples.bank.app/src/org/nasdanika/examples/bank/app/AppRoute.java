@@ -197,13 +197,13 @@ public class AppRoute implements Route {
 		form.formGroup(
 				"Login", 
 				"login", 
-				htmlFactory.input(InputType.text, "login", null, "login", "Enter login"),
+				htmlFactory.input(InputType.text).id("login").name("login").placeholder("Enter login"),
 				"Enter your login name").status(Status.SUCCESS);
 		
 		FormInputGroup passwordFormInputGroup = form.formInputGroup(
 				"Password", 
 				"password", 
-				htmlFactory.input(InputType.password, "password", null, "password", "Enter password"),
+				htmlFactory.input(InputType.password).name("password").id("password").placeholder("Enter password"),
 				"Enter password").status(Status.ERROR).feedback();
 		
 		Map<String, Object> options = new HashMap<String, Object>();
@@ -220,12 +220,10 @@ public class AppRoute implements Route {
 		FormInputGroup creditCardGroup = form.formInputGroup(
 				"Credit card", 
 				"credit_card", 
-				htmlFactory.input(
-						InputType.number, 
-						"credit_card", 
-						null, 
-						"credit_card", 
-						"Credit card number"), 
+				htmlFactory.input(InputType.number) 
+						.name("credit_card")
+						.id("credit_card") 
+						.placeholder("Credit card number"), 
 				"Invalid card number").status(Status.ERROR);
 		
 		creditCardGroup.leftAddOn(htmlFactory.glyphicon(Glyphicon.credit_card));

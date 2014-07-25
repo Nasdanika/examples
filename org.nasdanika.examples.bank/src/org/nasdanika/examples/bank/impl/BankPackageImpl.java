@@ -316,24 +316,6 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCustomer_Login() {
-		return (EAttribute)customerEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCustomer_PasswordHash() {
-		return (EAttribute)customerEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getAccount() {
 		return accountEClass;
 	}
@@ -764,8 +746,6 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 		customerEClass = createEClass(CUSTOMER);
 		createEReference(customerEClass, CUSTOMER__ACCOUNTS);
 		createEAttribute(customerEClass, CUSTOMER__NAME);
-		createEAttribute(customerEClass, CUSTOMER__LOGIN);
-		createEAttribute(customerEClass, CUSTOMER__PASSWORD_HASH);
 
 		accountEClass = createEClass(ACCOUNT);
 		createEReference(accountEClass, ACCOUNT__STATEMENTS);
@@ -860,11 +840,8 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		EGenericType g1 = createEGenericType(theSecurityPackage.getProtectionDomain());
-		EGenericType g2 = createEGenericType(this.getLoginPasswordCredentials());
-		g1.getETypeArguments().add(g2);
-		systemOfRecordsEClass.getEGenericSuperTypes().add(g1);
-		customerEClass.getESuperTypes().add(theSecurityPackage.getUser());
+		systemOfRecordsEClass.getESuperTypes().add(theSecurityPackage.getLoginPasswordProtectionDomain());
+		customerEClass.getESuperTypes().add(theSecurityPackage.getLoginPasswordHashUser());
 		internalTransactionEClass.getESuperTypes().add(this.getTransaction());
 		externalTransactionEClass.getESuperTypes().add(this.getTransaction());
 		depositAccountEClass.getESuperTypes().add(this.getAccount());
@@ -887,8 +864,6 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 		initEClass(customerEClass, Customer.class, "Customer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCustomer_Accounts(), this.getAccount(), null, "accounts", null, 0, -1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomer_Name(), ecorePackage.getEString(), "name", null, 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCustomer_Login(), ecorePackage.getEString(), "login", null, 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCustomer_PasswordHash(), ecorePackage.getEByteArray(), "passwordHash", null, 0, 1, Customer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accountEClass, Account.class, "Account", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAccount_Statements(), this.getStatement(), null, "statements", null, 0, -1, Account.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -968,13 +943,13 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (this, 
 		   source, 
 		   new String[] {
 			 "documentation", "This package contains bank classes.\r\n\r\nOne more line."
-		   });		
+		   });	
 		addAnnotation
 		  (systemOfRecordsEClass, 
 		   source, 

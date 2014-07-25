@@ -47,6 +47,9 @@
             </script>
             <script>/js/backbone-min.js</script>
             <script>/bootstrap/js/bootstrap.min.js</script>
+            <script>
+               /js/require.js
+            </script>
       </default_html_factory>
    </extension>
    <extension

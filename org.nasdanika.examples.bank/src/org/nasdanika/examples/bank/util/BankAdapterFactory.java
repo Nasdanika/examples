@@ -6,6 +6,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.nasdanika.cdo.security.LoginPasswordHashUser;
+import org.nasdanika.cdo.security.LoginPasswordProtectionDomain;
 import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.cdo.security.User;
@@ -132,12 +134,20 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 				return createProtectionDomainAdapter();
 			}
 			@Override
+			public Adapter caseLoginPasswordProtectionDomain(LoginPasswordProtectionDomain object) {
+				return createLoginPasswordProtectionDomainAdapter();
+			}
+			@Override
 			public Adapter casePrincipal(Principal object) {
 				return createPrincipalAdapter();
 			}
 			@Override
 			public Adapter caseUser(User object) {
 				return createUserAdapter();
+			}
+			@Override
+			public Adapter caseLoginPasswordHashUser(LoginPasswordHashUser object) {
+				return createLoginPasswordHashUserAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -384,6 +394,20 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.nasdanika.cdo.security.LoginPasswordProtectionDomain <em>Login Password Protection Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.nasdanika.cdo.security.LoginPasswordProtectionDomain
+	 * @generated
+	 */
+	public Adapter createLoginPasswordProtectionDomainAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.nasdanika.cdo.security.Principal <em>Principal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -408,6 +432,20 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.nasdanika.cdo.security.LoginPasswordHashUser <em>Login Password Hash User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.nasdanika.cdo.security.LoginPasswordHashUser
+	 * @generated
+	 */
+	public Adapter createLoginPasswordHashUserAdapter() {
 		return null;
 	}
 

@@ -2,8 +2,11 @@
  */
 package org.nasdanika.examples.bank.impl;
 
-import java.security.MessageDigest;
+import java.math.BigDecimal;
+import java.text.MessageFormat;
+import java.util.Calendar;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.common.util.EList;
@@ -19,18 +22,26 @@ import org.nasdanika.cdo.security.SecurityPackage;
 import org.nasdanika.core.AuthorizationProvider.AccessDecision;
 import org.nasdanika.core.Context;
 import org.nasdanika.examples.bank.Account;
+import org.nasdanika.examples.bank.BankFactory;
 import org.nasdanika.examples.bank.BankPackage;
+import org.nasdanika.examples.bank.CreditCard;
 import org.nasdanika.examples.bank.Customer;
+import org.nasdanika.examples.bank.PaymentProcessor;
+import org.nasdanika.examples.bank.Product;
+import org.nasdanika.examples.bank.SystemOfRecords;
+import org.nasdanika.examples.bank.TransactionType;
 import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.ApplicationPanel.ContentPanel;
 import org.nasdanika.html.Fragment;
 import org.nasdanika.html.HTMLFactory;
+import org.nasdanika.html.Navbar;
 import org.nasdanika.html.Table;
 import org.nasdanika.html.Table.Row;
 import org.nasdanika.html.UIElement.DeviceSize;
+import org.nasdanika.html.UIElement.Event;
 import org.nasdanika.html.UIElement.Style;
-import org.nasdanika.web.RouteMethod;
 import org.nasdanika.web.HttpContext;
+import org.nasdanika.web.RouteMethod;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,10 +52,10 @@ import org.nasdanika.web.HttpContext;
  * <ul>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getMemberOf <em>Member Of</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getPermissions <em>Permissions</em>}</li>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getAccounts <em>Accounts</em>}</li>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getLogin <em>Login</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getPasswordHash <em>Password Hash</em>}</li>
+ *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getAccounts <em>Accounts</em>}</li>
+ *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,7 +147,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * @generated
 	 */
 	public String getLogin() {
-		return (String)eGet(BankPackage.Literals.CUSTOMER__LOGIN, true);
+		return (String)eGet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__LOGIN, true);
 	}
 
 	/**
@@ -145,7 +156,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * @generated
 	 */
 	public void setLogin(String newLogin) {
-		eSet(BankPackage.Literals.CUSTOMER__LOGIN, newLogin);
+		eSet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__LOGIN, newLogin);
 	}
 
 	/**
@@ -154,7 +165,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * @generated
 	 */
 	public byte[] getPasswordHash() {
-		return (byte[])eGet(BankPackage.Literals.CUSTOMER__PASSWORD_HASH, true);
+		return (byte[])eGet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH, true);
 	}
 
 	/**
@@ -163,7 +174,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * @generated
 	 */
 	public void setPasswordHash(byte[] newPasswordHash) {
-		eSet(BankPackage.Literals.CUSTOMER__PASSWORD_HASH, newPasswordHash);
+		eSet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH, newPasswordHash);
 	}
 	
 	/**
@@ -230,13 +241,22 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 				.width(800)
 				.minHeight(600)
 				.style(Style.PRIMARY)
-				.header("Nasdanika Bank");
+				.header("Nasdanika Bank")
+				.headerLink("/index.html");
+
+		String objectPath = context.getObjectPath(this);
+		Navbar navBar = htmlFactory.navbar(StringEscapeUtils.escapeHtml4(getName()), objectPath+".html"); // Profile for authenticated user?		
+		navBar.item(htmlFactory.link(objectPath+"/signout", "Sign out").on(Event.click, "return confirm('Are you sure you want to sign out?');"), false, true);
+
+		//Breadcrumbs breadcrumbs = htmlFactory.breadcrumbs();
+		//for (TraceEntry te: context.getPathTrace()) {
+		//	breadcrumbs.item(te.getPath(), te.getDisplayName());
+		//}
+		//breadcrumbs.item(null, StringEscapeUtils.escapeHtml4("Hi there"));		
+
+		appPanel.navigation(navBar /*, breadcrumbs */);
 		
 		ContentPanel mainPanel = appPanel.contentPanel("Loading accounts panel...").id("main");
-		
-		if (context.authorize(this, "something", null, null)) {
-			System.out.println("ah");
-		}
 		
 		Fragment rightPanelContent = htmlFactory.fragment();
 		context.buildUICategory("right-panel", rightPanelContent, null);
@@ -274,14 +294,166 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 				accountsTable, 
 				null).toString()+htmlFactory.title("Accounts");
 	}
-
-	@Override
-	public void setPassword(String password) throws Exception {
-		MessageDigest md = MessageDigest.getInstance("SHA");
-		md.update(getLogin().getBytes(UTF_8));
-		md.update((byte) 0); // Separator
-		md.update(password.getBytes(UTF_8));
-		setPasswordHash(md.digest());
+		
+	@RouteMethod()
+	public void signout(final HttpContext context) throws Exception {
+		context.getRequest().getSession().invalidate();
+		context.getResponse().sendRedirect(context.getObjectPath(eContainer())+".html");
+	}	
+	
+	/**
+	 * Initializes customer with random data.
+	 */
+	void init() {	
+		
+		PaymentProcessor visa = new PaymentProcessor() {
+			
+			@Override
+			public void close() throws Exception {
+				// NOP
+				
+			}
+			
+			private long counter;
+			
+			@Override
+			public String transfer(
+					TransactionType type, 
+					String internalAccount,
+					String externalAccount, 
+					BigDecimal amount, 
+					String id, 
+					String comment) {
+				
+				return getId()+"/"+Long.toString(System.currentTimeMillis(), Character.MAX_RADIX)+"-"+Long.toString(++counter, Character.MAX_RADIX);
+			}
+			
+			@Override
+			public String getId() {
+				return "Visa";
+			}
+		};
+		
+		PaymentProcessor ach = new PaymentProcessor() {
+			
+			@Override
+			public void close() throws Exception {
+				// NOP
+				
+			}
+			
+			private long counter;
+			
+			@Override
+			public String transfer(
+					TransactionType type, 
+					String internalAccount,
+					String externalAccount, 
+					BigDecimal amount, 
+					String id, 
+					String comment) {
+				
+				return getId()+"/"+Long.toString(System.currentTimeMillis(), Character.MAX_RADIX)+"-"+Long.toString(++counter, Character.MAX_RADIX);
+			}
+			
+			@Override
+			public String getId() {
+				return "ACH";
+			}
+		};		
+		
+		SystemOfRecords systemOfRecords = (SystemOfRecords) eContainer();
+		for (Product p: systemOfRecords.getProducts()) {
+			if (random.nextBoolean()) {
+				CreditCard account = BankFactory.eINSTANCE.createCreditCard();
+				account.setCreditLimit(new BigDecimal("15000.00"));
+				account.setRate(new BigDecimal("0.072"));
+				account.setGracePeriod(30);
+				account.setBalance(BigDecimal.ZERO);
+				account.setProduct(p);
+				account.setPeriodStart(random.nextInt(28)+1);
+				getAccounts().add(account);
+				fillAccount(account, visa, ach);
+			}
+		}
+		
 	}
+	
+	private MessageFormat mf = new MessageFormat("{0,number,#.00}");
+	
+	private Random random = new Random(System.currentTimeMillis()+hashCode());
+	
+	private BigDecimal randomAmount(double from, double to) {
+		double ram = from + random.nextDouble()*(to-from);		
+		return new BigDecimal(mf.format(new Object[] {ram}));
+	}
+
+	private void fillAccount(Account account, PaymentProcessor cardProcessor, PaymentProcessor ach) {
+		Calendar calendar = Calendar.getInstance();
+		Calendar now = Calendar.getInstance();
+		
+		calendar.add(Calendar.MONTH, -4);
+		
+		calendar.set(Calendar.HOUR, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
+		BigDecimal balance = BigDecimal.ZERO;
+		for (; calendar.before(now); calendar.add(Calendar.DAY_OF_MONTH, random.nextInt(3)+1)) {
+			switch (random.nextInt(5)) {
+			case 0:
+				balance = balance.add(account.transfer(
+						TransactionType.DEBIT, 
+						cardProcessor, 
+						"WalMart", 
+						calendar.getTime(), 
+						randomAmount(23.8, 75.6), 
+						"General merchandize").getAmount());
+				break;
+			case 1:
+				balance = balance.add(account.transfer(
+						TransactionType.DEBIT, 
+						cardProcessor, 
+						"McDonalds", 
+						calendar.getTime(), 
+						randomAmount(7.5, 14.9), 
+						"Dining out").getAmount());
+				break;
+			case 2:
+				balance = balance.add(account.transfer(
+						TransactionType.DEBIT, 
+						cardProcessor, 
+						"DSW", 
+						calendar.getTime(), 
+						randomAmount(35, 120), 
+						"Clothing and shoes").getAmount());
+				break;
+			case 3:
+				balance = balance.add(account.transfer(
+						TransactionType.DEBIT, 
+						cardProcessor, 
+						"Shell", 
+						calendar.getTime(), 
+						randomAmount(25, 56), 
+						"Gasoline").getAmount());
+				break;
+			case 4:
+				if (BigDecimal.ZERO.compareTo(balance)<0) {
+					account.transfer(
+							TransactionType.CREDIT, 
+							ach, 
+							"Automated transfer", 
+							calendar.getTime(), 
+							balance, 
+							"Payment, thank you");
+					balance = BigDecimal.ZERO;
+				}
+				break;
+				
+			}
+		}				
+	}
+	
 
 } //CustomerImpl
