@@ -208,7 +208,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		signinForm.formGroup(null, "password", password, null);
 		signinForm.content(" ");
 		
-		signinForm.button("Sign In").type(Type.SUBMIT);
+		signinForm.button("Sign In").type(Type.SUBMIT).id("signInButton");
 		
 		signinForm.on(Event.submit,
 				htmlFactory.require(
