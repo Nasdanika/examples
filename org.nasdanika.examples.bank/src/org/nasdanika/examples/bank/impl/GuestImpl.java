@@ -36,6 +36,7 @@ import org.nasdanika.html.Button.Type;
 import org.nasdanika.html.Form;
 import org.nasdanika.html.Form.Method;
 import org.nasdanika.html.HTMLFactory;
+import org.nasdanika.html.HTMLFactory.Glyphicon;
 import org.nasdanika.html.HTMLFactory.InputType;
 import org.nasdanika.html.Input;
 import org.nasdanika.html.Modal;
@@ -196,6 +197,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 				.required();
 		
 		signinForm.formGroup("Online ID", "onlineId", onlineId, null);
+
 		signinForm.content(" ");
 		
 		// TODO - multi-factor authentication - password in a dialog with an image confirming site identity 		
@@ -208,7 +210,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		signinForm.formGroup(null, "password", password, null);
 		signinForm.content(" ");
 		
-		signinForm.button("Sign In").type(Type.SUBMIT).id("signInButton");
+		signinForm.button("Sign In&nbsp;", htmlFactory.glyphicon(Glyphicon.log_in)).type(Type.SUBMIT).id("signInButton");
 		
 		signinForm.on(Event.submit,
 				htmlFactory.require(

@@ -1,69 +1,64 @@
 package org.nasdanika.examples.bank.app.tests;
 
-import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.junit.runner.RunWith;
+import org.nasdanika.examples.bank.app.tests.actors.BankActorFactory;
+import org.nasdanika.examples.bank.app.tests.actors.impl.BankActorFactoryImpl;
+import org.nasdanika.examples.bank.app.tests.pages.BankPageFactory;
+import org.nasdanika.examples.bank.app.tests.pages.impl.BankPageFactoryImpl;
+import org.nasdanika.webtest.NasdanikaTestRunner;
+import org.nasdanika.webtest.Report;
+import org.nasdanika.webtest.Title;
+import org.nasdanika.webtest.WebTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteStatus;
 
-public class AppTest {
+@RunWith(NasdanikaTestRunner.class)
+@Report(outputDir="C:\\_temp\\TestReport")
+@Title("Nasdanika Bank Web Tests Report")
+public class AppTest implements WebTest {
 	
 	private WebDriver driver;
+	private BankActorFactory actorFactory;
 
 	@Before
-	public void waitForContainerStart() throws Exception {
+	public void setUp() throws Exception {
 		System.out.println("Waiting a bit for the OSGi container to start");
-		Thread.sleep(5000);
+		Thread.sleep(1000);
         driver = new FirefoxDriver(); // new ChromeDriver();
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        BankPageFactory pageFactory = NasdanikaTestRunner.proxyPageFactory(new BankPageFactoryImpl(driver, "http://localhost:8080"));
+        actorFactory = NasdanikaTestRunner.proxyActorFactory(new BankActorFactoryImpl(pageFactory));
 	}
-
+	
 	@Test
-	public void simpleTest() throws Exception {
-        driver.get("http://localhost:8080/router/app.html");
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        File dest = new File("screenshot.png");
-		if (scrFile.renameTo(dest)) {
-            System.out.println(dest.getAbsolutePath());        	
-        }
-     // Now you can do whatever you need to do with it, for example copy somewhere
-//     FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot.png"));
-//        // Alternatively the same thing can be done like this
-//        // driver.navigate().to("http://www.google.com");
-//
-//        // Find the text input element by its name
-//        WebElement element = driver.findElement(By.name("q"));
-//
-//        // Enter something to search for
-//        element.sendKeys("Cheese!");
-//
-//        // Now submit the form. WebDriver will find the form for us from the element
-//        element.submit();
-//
-//        // Check the title of the page
-//        System.out.println("Page title is: " + driver.getTitle());
-//        
-//        // Google's search is rendered dynamically with JavaScript.
-//        // Wait for the page to load, timeout after 10 seconds
-//        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver d) {
-//                return d.getTitle().toLowerCase().startsWith("cheese!");
-//            }
-//        });
-//
-//        // Should see: "cheese! - Google Search"
-//        System.out.println("Page title is: " + driver.getTitle());
-        
+	@Title("Sign-in")
+	public void signIn() throws Exception {
+		actorFactory.createGuest().signIn("a", "b");
+		Thread.sleep(1000);
+		//fail("Just to test");
+	}
+	
+	@Test
+	public void yet() {
 		
-		System.out.println("Oh-oh!!!");
 	}
 
 	@After
-	public void quitDriver() {
+	public void quitDriver() throws Exception {
+		//Thread.sleep(5000); // For visual inpsection.
         //Close the browser
-        driver.quit();		
+        driver.quit();
+        driver = null;
+	}
+
+	@Override
+	public WebDriver getWebDriver() {
+		return driver;
 	}
 }

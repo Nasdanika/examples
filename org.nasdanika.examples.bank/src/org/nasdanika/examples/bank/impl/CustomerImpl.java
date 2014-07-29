@@ -32,6 +32,7 @@ import org.nasdanika.examples.bank.SystemOfRecords;
 import org.nasdanika.examples.bank.TransactionType;
 import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.ApplicationPanel.ContentPanel;
+import org.nasdanika.html.HTMLFactory.Glyphicon;
 import org.nasdanika.html.Fragment;
 import org.nasdanika.html.HTMLFactory;
 import org.nasdanika.html.Navbar;
@@ -246,7 +247,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 
 		String objectPath = context.getObjectPath(this);
 		Navbar navBar = htmlFactory.navbar(StringEscapeUtils.escapeHtml4(getName()), objectPath+".html"); // Profile for authenticated user?		
-		navBar.item(htmlFactory.link(objectPath+"/signout", "Sign out").on(Event.click, "return confirm('Are you sure you want to sign out?');"), false, true);
+		navBar.item(htmlFactory.link(objectPath+"/signout", "Sign out&nbsp;", htmlFactory.glyphicon(Glyphicon.log_out)).on(Event.click, "return confirm('Are you sure you want to sign out?');"), false, true);
 
 		//Breadcrumbs breadcrumbs = htmlFactory.breadcrumbs();
 		//for (TraceEntry te: context.getPathTrace()) {

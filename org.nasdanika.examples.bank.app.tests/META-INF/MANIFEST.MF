@@ -1,11 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
-Bundle-SymbolicName: org.nasdanika.examples.bank.app.tests
+Bundle-SymbolicName: org.nasdanika.examples.bank.app.tests;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Nasdanika LLC
 Fragment-Host: org.nasdanika.examples.bank.app;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit,
  org.openqa.selenium;bundle-version="2.42.1",
- org.seleniumhq.selenium.fluent;bundle-version="1.14.5"
+ org.seleniumhq.selenium.fluent;bundle-version="1.14.5",
+ org.nasdanika.examples.bank.app.tests.actors.impl;bundle-version="0.1.0",
+ org.nasdanika.examples.bank.app.tests.pages.impl;bundle-version="0.1.0"
