@@ -16,10 +16,9 @@ import org.nasdanika.webtest.Title;
 import org.nasdanika.webtest.WebTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.RemoteStatus;
 
 @RunWith(NasdanikaTestRunner.class)
-@Report(outputDir="C:\\_temp\\TestReport")
+//@Report(outputDir="C:\\_temp\\TestReport")
 @Title("Nasdanika Bank Web Tests Report")
 public class AppTest implements WebTest {
 	
