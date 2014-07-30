@@ -57,13 +57,13 @@ public class Registration implements WebTest {
 	
 	@Test
 	public void duplicateId() {
-		Assert.fail("For demonstration purposes");
+		
 	}
 	
 	@Test
 	@Description("All input fields are blank")
 	public void allBlank() {
-		throw new IllegalStateException("To demo errors vs. failures");	
+		
 	}
 	
 	@Test

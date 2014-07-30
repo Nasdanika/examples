@@ -8,6 +8,6 @@ import org.nasdanika.webtest.Title;
 @RunWith(NasdanikaTestSuite.class)
 @Title("Nasdanika Bank Web Tests Report")
 @SuiteClasses(Registration.class)
-public class BankTests {
+public class BankTest {
 	
 }

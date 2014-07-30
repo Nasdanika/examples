@@ -41,11 +41,6 @@
 					<argLine>-Xmx512m -Dorg.osgi.service.http.port=8080</argLine>
 					<bundleStartLevel>
 						<bundle>
-							<id>org.apache.felix.webconsole</id>
-							<level>4</level>
-							<autoStart>true</autoStart>
-						</bundle>
-						<bundle>
 							<id>org.eclipse.core.runtime</id>
 							<level>4</level>
 							<autoStart>true</autoStart>
