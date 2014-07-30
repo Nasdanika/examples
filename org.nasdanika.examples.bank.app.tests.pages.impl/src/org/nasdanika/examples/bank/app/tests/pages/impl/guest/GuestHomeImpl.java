@@ -1,17 +1,19 @@
 package org.nasdanika.examples.bank.app.tests.pages.impl.guest;
 
-import org.nasdanika.examples.bank.app.tests.pages.guest.Home;
+import org.nasdanika.examples.bank.app.tests.pages.guest.GuestHome;
+import org.nasdanika.examples.bank.app.tests.pages.guest.SignUpDialog;
 import org.nasdanika.examples.bank.app.tests.pages.impl.BankPageFactoryImpl;
 import org.nasdanika.webtest.Page;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
-public class HomeImpl implements Home {
+public class GuestHomeImpl implements GuestHome {
 		
 	private BankPageFactoryImpl factory;
 	private WebDriver webDriver;
 
-	public HomeImpl(WebDriver webDriver) {
+	public GuestHomeImpl(WebDriver webDriver) {
 		this.webDriver = webDriver;
 	}
 	
@@ -22,6 +24,8 @@ public class HomeImpl implements Home {
 	private WebElement onlineId;
 	private WebElement password;
 	private WebElement signInButton;
+	
+	private WebElement signUpMenuItem;
 
 	@Override
 	public void enterOnlineId(String onlineId) {
@@ -52,8 +56,9 @@ public class HomeImpl implements Home {
 	}
 
 	@Override
-	public boolean match() {		
-		return onlineId.isDisplayed();
+	public SignUpDialog clickSignUp() {
+		signUpMenuItem.click();
+		return PageFactory.initElements(webDriver, SignUpDialogImpl.class);
 	}
 
 }

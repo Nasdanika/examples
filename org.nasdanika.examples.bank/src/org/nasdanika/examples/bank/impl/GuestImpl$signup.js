@@ -1,11 +1,12 @@
 var jqForm = jQuery(this);
 var formGroups = jqForm.children(".form-group");
 formGroups.removeClass("has-error");
-jqForm.children("#error-message").html("");
+var errorMessageContainer = jqForm.children("#signupErrorMessage");
+errorMessageContainer.html("");
 
 if (this.onlineId.value && this.customerName.value && this.password.value && this.passwordConfirm.value) {
 	if (this.password.value!=this.passwordConfirm.value) {
-		jqForm.children("#error-message").html("Passwords don't match");
+		errorMessageContainer.html("Passwords don't match");
 		var pwd = formGroups.eq(3);
 		pwd.addClass("has-error");
 		pwd.children()[0].focus();
@@ -34,7 +35,7 @@ if (this.onlineId.value && this.customerName.value && this.password.value && thi
 					jQuery('#authentication-failed-modal').modal();
 					fe.eq(0).children()[0].focus();												
 				} else {
-					jqForm.children("#error-message").html(status+": "+error);		
+					errorMessageContainer.html(status+": "+error);		
 				}
 			}
 		});
@@ -74,7 +75,7 @@ if (this.onlineId.value && this.customerName.value && this.password.value && thi
 		error = "<LI>Online ID is blank</LI>"+error;			
 	}
 	
-	jqForm.children("#error-message").html("<UL>"+error+"</UL>");			
+	errorMessageContainer.html("<UL>"+error+"</UL>");			
 }
 
 return false;

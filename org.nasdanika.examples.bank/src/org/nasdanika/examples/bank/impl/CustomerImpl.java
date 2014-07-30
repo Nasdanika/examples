@@ -246,7 +246,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 				.headerLink("/index.html");
 
 		String objectPath = context.getObjectPath(this);
-		Navbar navBar = htmlFactory.navbar(StringEscapeUtils.escapeHtml4(getName()), objectPath+".html"); // Profile for authenticated user?		
+		Navbar navBar = htmlFactory.navbar(htmlFactory.span(StringEscapeUtils.escapeHtml4(getName())).id("banner"), objectPath+".html"); // Profile for authenticated user?		
 		navBar.item(htmlFactory.link(objectPath+"/signout", "Sign out&nbsp;", htmlFactory.glyphicon(Glyphicon.log_out)).on(Event.click, "return confirm('Are you sure you want to sign out?');"), false, true);
 
 		//Breadcrumbs breadcrumbs = htmlFactory.breadcrumbs();
@@ -269,7 +269,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 		appPanel.footer(htmlFactory.link("#", "Contact Us"));
 		return htmlFactory.routerApplication(
 				"Nasdanika Bank", 
-				"main"+context.getObjectPath(this)+"/accounts.html", 
+				"main/"+context.getObjectPath(this)+"/accounts.html", 
 				null, 
 				appPanel).toString();
 	}
@@ -285,7 +285,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 			Row aRow = accountsTable.row();
 			aRow.cell(htmlFactory.routeLink(
 					"main", 
-					context.getObjectPath(a)+".html", 
+					"/"+context.getObjectPath(a)+".html", 
 					StringEscapeUtils.escapeHtml4(a.getProduct().getName()+"-"+a.cdoID())));
 			aRow.cell(a.getBalance().negate()).attribute("align", "right");
 		}

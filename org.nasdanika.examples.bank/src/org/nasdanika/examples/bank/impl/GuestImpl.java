@@ -217,7 +217,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 						htmlFactory.function("signin").code("signin(this);").bind("this"), 
 						objectPath+"/resource/signin.js")+"; return false;");
 		
-		navBar.item(htmlFactory.link("#", "Sign up").on(Event.click, "jQuery('#sign-up-form-modal').modal();"), false, true);
+		navBar.item(htmlFactory.link("#", "Sign up").id("signUpMenuItem").on(Event.click, "jQuery('#sign-up-form-modal').modal();"), false, true);
 		
 		appPanel.navigation(navBar);		
 		
@@ -242,7 +242,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 				.action(objectPath+"/signup")
 				.id("signup-form");
 		
-		signupForm.content(htmlFactory.div("").style("color", "red").id("error-message"));
+		signupForm.content(htmlFactory.div("").style("color", "red").id("signupErrorMessage"));
 		
 		Input rId = htmlFactory.input(InputType.text)
 				.name("onlineId")
@@ -281,9 +281,9 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		signupForm.formGroup("Confirm password", "rPasswordConfirm", rPasswordConfirm, null);
 		signupForm.content(" ");
 		
-		signupForm.button("Sign up").type(Type.SUBMIT).style(Style.PRIMARY);
+		signupForm.button("Sign up").type(Type.SUBMIT).style(Style.PRIMARY).id("signupSubmitButton");
 		signupForm.content("&nbsp;");
-		signupForm.button("Cancel").attribute("data-dismiss", "modal");
+		signupForm.button("Cancel").attribute("data-dismiss", "modal").id("signupCancelButton");
 		
 		signupForm.on(Event.submit, getClass().getResourceAsStream("GuestImpl$signup.js")); 
 		

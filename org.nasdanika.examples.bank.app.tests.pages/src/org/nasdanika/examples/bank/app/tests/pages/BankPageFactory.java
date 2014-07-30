@@ -1,9 +1,12 @@
 package org.nasdanika.examples.bank.app.tests.pages;
 
-import org.nasdanika.examples.bank.app.tests.pages.guest.Home;
+import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
+import org.nasdanika.examples.bank.app.tests.pages.guest.GuestHome;
 
 public interface BankPageFactory {
 	
-	Home createGuestHomePage();
+	GuestHome createGuestHome();
+
+	CustomerHome createCustomerHome();
 	
 }

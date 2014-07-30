@@ -1,9 +1,8 @@
 package org.nasdanika.examples.bank.app.tests.pages.guest;
 
 import org.nasdanika.webtest.Page;
-import org.nasdanika.webtest.WebDriverPage;
 
-public interface Home extends WebDriverPage {
+public interface GuestHome extends Page {
 	
 	/**
 	 * Navigates to the home page.
@@ -20,6 +19,7 @@ public interface Home extends WebDriverPage {
 	 * if incorrect credentials were provided.
 	 */
 	Page clickSignIn();
-	
+
+	SignUpDialog clickSignUp();	
 
 }

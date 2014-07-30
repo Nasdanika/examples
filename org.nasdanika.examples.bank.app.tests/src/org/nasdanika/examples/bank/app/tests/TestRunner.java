@@ -16,7 +16,7 @@ public class TestRunner implements IApplication {
         RunListener runListener = new TextListener(System.out);
         jUnitCore.addListener(runListener);
 
-        Result result = jUnitCore.run(Computer.serial(), AppTest.class);
+        Result result = jUnitCore.run(Computer.serial(), BankTests.class);
         
         //System.out.println(result);
         

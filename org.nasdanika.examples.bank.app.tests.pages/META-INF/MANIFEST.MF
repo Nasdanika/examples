@@ -7,4 +7,5 @@ Bundle-Vendor: Nasdanika LLC
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.nasdanika.webtest;bundle-version="0.1.0";visibility:=reexport
 Export-Package: org.nasdanika.examples.bank.app.tests.pages,
+ org.nasdanika.examples.bank.app.tests.pages.customer,
  org.nasdanika.examples.bank.app.tests.pages.guest
