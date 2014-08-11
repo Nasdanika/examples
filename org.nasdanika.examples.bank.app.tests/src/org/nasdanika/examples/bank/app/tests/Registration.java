@@ -18,12 +18,12 @@ import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
 import org.nasdanika.examples.bank.app.tests.pages.impl.BankPageFactoryImpl;
 import org.nasdanika.webtest.Actor;
 import org.nasdanika.webtest.Description;
-import org.nasdanika.webtest.NasdanikaTestRunner;
+import org.nasdanika.webtest.NasdanikaWebTestRunner;
 import org.nasdanika.webtest.WebTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-@RunWith(NasdanikaTestRunner.class)
+@RunWith(NasdanikaWebTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Description("Tests of registration scenarios")
 public class Registration implements WebTest {
@@ -41,8 +41,8 @@ public class Registration implements WebTest {
 	public void setUp() throws Exception {
         driver = new FirefoxDriver(); // new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
-        BankPageFactory pageFactory = NasdanikaTestRunner.proxyPageFactory(new BankPageFactoryImpl(driver, "http://localhost:8080"));
-        actorFactory = NasdanikaTestRunner.proxyActorFactory(new BankActorFactoryImpl(pageFactory));
+        BankPageFactory pageFactory = NasdanikaWebTestRunner.proxyPageFactory(new BankPageFactoryImpl(driver, "http://localhost:8080"));
+        actorFactory = NasdanikaWebTestRunner.proxyActorFactory(new BankActorFactoryImpl(pageFactory));
 	}
 	
 	@Test
@@ -115,8 +115,10 @@ public class Registration implements WebTest {
 	
 	@After
 	public void quitDriver() throws Exception {
-        driver.quit();
-        driver = null;
+		if (driver!=null) {
+	        driver.quit();
+	        driver = null;
+		}
 	}
 	
 }
