@@ -3,10 +3,12 @@
 package org.nasdanika.examples.bank.impl;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.eclipse.emf.cdo.CDOLock;
 import org.eclipse.emf.cdo.view.CDOView;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -355,43 +357,53 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		// TODO - min length, strength checks.
 		
 		SystemOfRecords systemOfRecords = (SystemOfRecords) eContainer();
-		for (User u: systemOfRecords.getAllUsers()) {
-			if (u instanceof LoginPasswordHashUser) {
-				LoginPasswordHashUser lphUser = (LoginPasswordHashUser) u;
-				if (lphUser.getLogin()!=null && lphUser.getLogin().equalsIgnoreCase(onlineId)) {
-					context.getResponse().sendError(HttpServletResponse.SC_BAD_REQUEST, "Online ID already exists");
-					return null;					
+		CDOLock writeLock = systemOfRecords.cdoWriteLock();
+		if (writeLock.tryLock(2, TimeUnit.SECONDS)) {
+			try {
+				for (User u: systemOfRecords.getAllUsers()) {
+					if (u instanceof LoginPasswordHashUser) {
+						LoginPasswordHashUser lphUser = (LoginPasswordHashUser) u;
+						if (lphUser.getLogin()!=null && lphUser.getLogin().equalsIgnoreCase(onlineId)) {
+							context.getResponse().sendError(HttpServletResponse.SC_BAD_REQUEST, "Online ID already exists");
+							return null;					
+						}
+					}
 				}
+				Customer newCustomer = BankFactory.eINSTANCE.createCustomer();
+				newCustomer.setLogin(onlineId);
+				newCustomer.setName(name);
+				systemOfRecords.setPasswordHash(newCustomer, password);
+				systemOfRecords.getCustomers().add(newCustomer);
+				
+				((CustomerImpl) newCustomer).init();
+				
+				Principal authenticatedUser = ((CDOViewContext<CDOView, LoginPasswordCredentials>) context).authenticate(new LoginPasswordCredentials() {
+					
+					@Override
+					public String getPassword() {
+						return password;
+					}
+					
+					@Override
+					public String getLogin() {
+						return onlineId;
+					}
+				});
+				
+				if (newCustomer!=authenticatedUser) {
+					context.getResponse().sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Sign up failed - internal error");
+					return null;
+				}
+				
+				 // Double redirect because new user OID is not available.
+				return context.getObjectPath(systemOfRecords)+".html"; // +"/operation/getUser/"+onlineId+"/home.html";
+			} finally {
+				writeLock.unlock();
 			}
-		}
-		Customer newCustomer = BankFactory.eINSTANCE.createCustomer();
-		newCustomer.setLogin(onlineId);
-		newCustomer.setName(name);
-		systemOfRecords.setPasswordHash(newCustomer, password);
-		systemOfRecords.getCustomers().add(newCustomer);
+		} 
 		
-		((CustomerImpl) newCustomer).init();
-		
-		Principal authenticatedUser = ((CDOViewContext<CDOView, LoginPasswordCredentials>) context).authenticate(new LoginPasswordCredentials() {
-			
-			@Override
-			public String getPassword() {
-				return password;
-			}
-			
-			@Override
-			public String getLogin() {
-				return onlineId;
-			}
-		});
-		
-		if (newCustomer!=authenticatedUser) {
-			context.getResponse().sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Sign up failed - internal error");
-			return null;
-		}
-		
-		 // Double redirect because new user OID is not available.
-		return context.getObjectPath(systemOfRecords)+".html"; // +"/operation/getUser/"+onlineId+"/home.html";
+		context.getResponse().sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, "Cannot acquire a write lock");
+		return null;			
 	}	
 	
 

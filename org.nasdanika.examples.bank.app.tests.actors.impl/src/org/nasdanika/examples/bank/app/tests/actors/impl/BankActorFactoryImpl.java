@@ -5,18 +5,20 @@ import org.nasdanika.examples.bank.app.tests.actors.Customer;
 import org.nasdanika.examples.bank.app.tests.actors.Guest;
 import org.nasdanika.examples.bank.app.tests.pages.BankPageFactory;
 import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
+import org.nasdanika.webtest.AbstractNasdanikaWebTestRunner;
+import org.openqa.selenium.WebDriver;
 
 public class BankActorFactoryImpl implements BankActorFactory {
 
 	private BankPageFactory pageFactory;
 
-	public BankActorFactoryImpl(BankPageFactory pageFactory) {
-		this.pageFactory = pageFactory;
+	public void setPageFactory(BankPageFactory pageFactory) {
+		this.pageFactory = AbstractNasdanikaWebTestRunner.proxyPageFactory(pageFactory);
 	}
 
 	@Override
-	public Guest createGuest() {		
-		return new GuestImpl(this);
+	public Guest createGuest(WebDriver webDriver) {		
+		return new GuestImpl(this, webDriver);
 	}
 
 	@Override
@@ -25,8 +27,8 @@ public class BankActorFactoryImpl implements BankActorFactory {
 	}
 
 	@Override
-	public Customer createCustomer(CustomerHome customerHome) {
-		return new CustomerImpl(this, customerHome);
+	public Customer createCustomer(WebDriver webDriver, CustomerHome customerHome) {
+		return new CustomerImpl(this, webDriver, customerHome);
 	}
 
 }

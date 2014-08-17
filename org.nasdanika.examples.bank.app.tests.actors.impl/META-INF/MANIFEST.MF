@@ -7,3 +7,4 @@ Bundle-Vendor: Nasdanika LLC
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.nasdanika.examples.bank.app.tests.actors;bundle-version="0.1.0";visibility:=reexport
 Export-Package: org.nasdanika.examples.bank.app.tests.actors.impl
+Service-Component: OSGI-INF/bank-actor-factory.xml

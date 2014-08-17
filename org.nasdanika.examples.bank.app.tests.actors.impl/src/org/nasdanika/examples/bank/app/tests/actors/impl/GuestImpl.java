@@ -6,17 +6,18 @@ import org.nasdanika.examples.bank.app.tests.actors.Guest;
 import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
 import org.nasdanika.examples.bank.app.tests.pages.guest.GuestHome;
 import org.nasdanika.webtest.Actor;
-import org.nasdanika.webtest.Description;
 import org.nasdanika.webtest.Page;
-import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebDriver;
 
 class GuestImpl implements Guest {
 
 	private BankActorFactory factory;
 	private Page currentPage;
+	private WebDriver webDriver;
 
-	GuestImpl(BankActorFactory factory) {
+	GuestImpl(BankActorFactory factory, WebDriver webDriver) {
 		this.factory = factory;
+		this.webDriver = webDriver;
 	}
 
 	@Override
@@ -26,13 +27,14 @@ class GuestImpl implements Guest {
 
 	@Override
 	public Actor signIn(String onlineId, String password) {
-		GuestHome home = factory.getPageFactory().createGuestHome();
-		home.open();
+		GuestHome home = factory.getPageFactory().createGuestHome(webDriver);
 		home.enterOnlineId(onlineId);
 		home.enterPassword(password);
 		currentPage = home.clickSignIn();
-		// TODO match the page to the customer home and return a new customer if match returns true.
-		return null;
+		if (currentPage instanceof CustomerHome) {
+			return factory.createCustomer(webDriver, (CustomerHome) currentPage);
+		}
+		return this;
 	}
 
 	@Override
@@ -41,8 +43,7 @@ class GuestImpl implements Guest {
 			String name, 
 			String password,
 			String passwordConfirmation) {
-		GuestHome home = factory.getPageFactory().createGuestHome();
-		home.open();
+		GuestHome home = factory.getPageFactory().createGuestHome(webDriver);
 		currentPage = home;
 		Page signUpResult = home.clickSignUp()
 				.waitToAppear()
@@ -54,10 +55,20 @@ class GuestImpl implements Guest {
 
 		if (signUpResult instanceof CustomerHome) {
 			Assert.assertEquals(name, ((CustomerHome) signUpResult).getBanner());
-			return factory.createCustomer((CustomerHome) signUpResult);
-		} 
+			return factory.createCustomer(webDriver, (CustomerHome) signUpResult);
+		} else {
+			currentPage = signUpResult;
+		}
 		
 		return this;
 	}
+	
+	@Override
+	public GuestHome goHome() {
+		currentPage = factory.getPageFactory().createGuestHome(webDriver);
+		((GuestHome) currentPage).open();
+		return (GuestHome) currentPage;
+	}
+	
 
 }

@@ -23,4 +23,6 @@ public interface SignUpDialog extends Page {
 	
 	GuestHome clickCancel();
 
+	String getErrorMessage();
+
 }

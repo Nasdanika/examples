@@ -1,5 +1,6 @@
 package org.nasdanika.examples.bank.app.tests.actors;
 
+import org.nasdanika.examples.bank.app.tests.pages.guest.GuestHome;
 import org.nasdanika.webtest.Actor;
 import org.nasdanika.webtest.Description;
 
@@ -25,5 +26,7 @@ public interface Guest extends Actor {
 	 * @return Customer if sign-up successful, Guest otherwise.
 	 */
 	Actor signUp(String onlineId, String name, String password, String passwordConfirmation);
+
+	GuestHome goHome();
 
 }
