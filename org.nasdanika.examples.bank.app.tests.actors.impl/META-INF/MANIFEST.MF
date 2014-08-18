@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.nasdanika.examples.bank.app.tests.actors.impl
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Nasdanika LLC
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.nasdanika.examples.bank.app.tests.actors;bundle-version="0.1.0";visibility:=reexport
+Require-Bundle: org.nasdanika.examples.bank.app.tests.actors;bundle-version="0.1.0";visibility:=reexport,
+ org.eclipse.osgi.services
 Export-Package: org.nasdanika.examples.bank.app.tests.actors.impl
 Service-Component: OSGI-INF/bank-actor-factory.xml

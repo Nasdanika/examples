@@ -7,6 +7,7 @@ import org.nasdanika.examples.bank.app.tests.pages.BankPageFactory;
 import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
 import org.nasdanika.webtest.AbstractNasdanikaWebTestRunner;
 import org.openqa.selenium.WebDriver;
+import org.osgi.service.component.ComponentContext;
 
 public class BankActorFactoryImpl implements BankActorFactory {
 
@@ -29,6 +30,11 @@ public class BankActorFactoryImpl implements BankActorFactory {
 	@Override
 	public Customer createCustomer(WebDriver webDriver, CustomerHome customerHome) {
 		return new CustomerImpl(this, webDriver, customerHome);
+	}
+	
+	
+	public void activate(ComponentContext context) {
+		System.out.println("Bank Actor Factory Component activated");
 	}
 
 }
