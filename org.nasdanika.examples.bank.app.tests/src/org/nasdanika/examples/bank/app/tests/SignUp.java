@@ -9,15 +9,13 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.nasdanika.examples.bank.app.tests.actors.BankActorFactory;
-import org.nasdanika.examples.bank.app.tests.actors.Customer;
-import org.nasdanika.examples.bank.app.tests.actors.Guest;
-import org.nasdanika.examples.bank.app.tests.actors.impl.BankActorFactoryImpl;
-import org.nasdanika.examples.bank.app.tests.pages.BankPageFactory;
-import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
-import org.nasdanika.examples.bank.app.tests.pages.guest.SignUpDialog;
-import org.nasdanika.examples.bank.app.tests.pages.impl.BankPageFactoryImpl;
+import org.nasdanika.examples.bank.ui.driver.pages.customer.CustomerHome;
+import org.nasdanika.examples.bank.ui.driver.pages.guest.SignUpDialog;
+import org.nasdanika.examples.bank.ui.driver.actors.BankActorFactory;
+import org.nasdanika.examples.bank.ui.driver.actors.Customer;
+import org.nasdanika.examples.bank.ui.driver.actors.Guest;
 import org.nasdanika.webtest.Actor;
+import org.nasdanika.webtest.ActorFactory;
 import org.nasdanika.webtest.Description;
 import org.nasdanika.webtest.NasdanikaWebTestRunner;
 import org.nasdanika.webtest.WebTest;
@@ -38,20 +36,25 @@ public class SignUp implements WebTest {
 	public WebDriver getWebDriver() {
 		return driver;
 	}
-	
-	private BankActorFactory actorFactory;
+		
+	@ActorFactory
+	public BankActorFactory actorFactory;
 
 	@Before
 	public void setUp() throws Exception {
         driver = new FirefoxDriver(); // new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
-        // Explicit creation of page and actor factories.
-        BankPageFactoryImpl pageFactoryImpl = new BankPageFactoryImpl();
-        pageFactoryImpl.setBaseURL("http://localhost:8080");
-		BankPageFactory pageFactory = NasdanikaWebTestRunner.proxyPageFactory(pageFactoryImpl);
-        BankActorFactoryImpl actorFactoryImpl = new BankActorFactoryImpl();
-        actorFactoryImpl.setPageFactory(pageFactory);
-		actorFactory = NasdanikaWebTestRunner.proxyActorFactory(actorFactoryImpl);
+        /* 
+         * Explicit creation of page and actor factories - commented out as
+         * it is taken care of by @ActorFactory annotation and service injection.
+         * keeping it here for the sake of demonstrating how to do it.
+         */
+//      BankPageFactoryImpl pageFactoryImpl = new BankPageFactoryImpl();
+//      pageFactoryImpl.setBaseURL("http://localhost:8080");
+//		BankPageFactory pageFactory = NasdanikaWebTestRunner.proxyPageFactory(pageFactoryImpl);
+//      BankActorFactoryImpl actorFactoryImpl = new BankActorFactoryImpl();
+//      actorFactoryImpl.setPageFactory(pageFactory);
+//		actorFactory = NasdanikaWebTestRunner.proxyActorFactory(actorFactoryImpl);
 	}
 	
 	@Test

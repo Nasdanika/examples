@@ -14,7 +14,7 @@
 	</prerequisites>
 
 	<properties>
-		<tycho-version>0.20.0</tycho-version>
+		<tycho-version>0.21.0</tycho-version>
 		<luna-repo.url>http://download.eclipse.org/releases/luna</luna-repo.url>
 	</properties>
 
@@ -43,6 +43,11 @@
 		<repository>
 			<id>nasdanika-server</id>
 			<url>http://www.nasdanika.org/server/repository</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>nasdanika-examples-bank-ui-driver</id>
+			<url>http://www.nasdanika.org/examples-bank-ui-driver/repository</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>
@@ -102,10 +107,6 @@
 		<module>../org.nasdanika.examples.bank</module>
 		<module>../org.nasdanika.examples.bank.app</module>
 		<module>../org.nasdanika.examples.bank.app.tests</module>
-		<module>../org.nasdanika.examples.bank.app.tests.actors</module>
-		<module>../org.nasdanika.examples.bank.app.tests.actors.impl</module>
-		<module>../org.nasdanika.examples.bank.app.tests.pages</module>
-		<module>../org.nasdanika.examples.bank.app.tests.pages.impl</module>
 		<module>../org.nasdanika.examples.feature</module>
 		<module>../org.nasdanika.examples.repository</module>
 	</modules>

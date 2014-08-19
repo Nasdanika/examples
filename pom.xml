@@ -13,10 +13,6 @@
 		<module>org.nasdanika.examples.bank</module>
 		<module>org.nasdanika.examples.bank.app</module>
 		<module>org.nasdanika.examples.bank.app.tests</module>
-		<module>org.nasdanika.examples.bank.app.tests.actors</module>
-		<module>org.nasdanika.examples.bank.app.tests.actors.impl</module>
-		<module>org.nasdanika.examples.bank.app.tests.pages</module>
-		<module>org.nasdanika.examples.bank.app.tests.pages.impl</module>
 		<module>org.nasdanika.examples.feature</module>
 		<module>org.nasdanika.examples.repository</module>
 	</modules>

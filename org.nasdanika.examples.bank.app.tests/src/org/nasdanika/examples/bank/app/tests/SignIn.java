@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.nasdanika.examples.bank.app.tests.actors.BankActorFactory;
-import org.nasdanika.examples.bank.app.tests.actors.Customer;
-import org.nasdanika.examples.bank.app.tests.actors.Guest;
-import org.nasdanika.examples.bank.app.tests.pages.customer.CustomerHome;
-import org.nasdanika.examples.bank.app.tests.pages.guest.GuestHome;
-import org.nasdanika.examples.bank.app.tests.pages.guest.SignInFailedDialog;
+import org.nasdanika.examples.bank.ui.driver.pages.customer.CustomerHome;
+import org.nasdanika.examples.bank.ui.driver.pages.guest.GuestHome;
+import org.nasdanika.examples.bank.ui.driver.pages.guest.SignInFailedDialog;
+import org.nasdanika.examples.bank.ui.driver.actors.BankActorFactory;
+import org.nasdanika.examples.bank.ui.driver.actors.Customer;
+import org.nasdanika.examples.bank.ui.driver.actors.Guest;
 import org.nasdanika.webtest.Actor;
 import org.nasdanika.webtest.ActorFactory;
 import org.nasdanika.webtest.Description;
@@ -59,7 +59,7 @@ public class SignIn implements WebTest {
 	}
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception {		
 		//String browser = System.getenv("browser");
 		if (browser==null || Browser.chrome.equals(browser)) {
 			driver = new ChromeDriver();

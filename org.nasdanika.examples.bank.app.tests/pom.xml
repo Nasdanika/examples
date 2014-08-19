@@ -16,12 +16,12 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<dependencies>
+					<dependencies>						
 						<dependency>
 							<type>eclipse-feature</type>
 							<artifactId>org.nasdanika.feature</artifactId>
 							<version>0.0.0</version>
-						</dependency>
+						</dependency>						
 						<dependency>
 							<type>eclipse-feature</type>
 							<artifactId>org.nasdanika.html.feature</artifactId>
@@ -37,8 +37,12 @@
 							<artifactId>org.nasdanika.server.third_party.feature</artifactId>
 							<version>0.0.0</version>
 						</dependency>												
+						<dependency>
+							<type>eclipse-feature</type>
+							<artifactId>org.nasdanika.examples.bank.ui.driver.feature</artifactId>
+							<version>0.0.0</version>
+						</dependency>
 					</dependencies>
-					<argLine>-Xmx512m -Dorg.osgi.service.http.port=8080</argLine>
 					<bundleStartLevel>
 						<bundle>
 							<id>org.eclipse.core.runtime</id>
@@ -65,6 +69,16 @@
 							<level>4</level>
 							<autoStart>true</autoStart>
 						</bundle>
+						<bundle>
+							<id>org.nasdanika.examples.bank.ui.driver.pages.impl</id>
+							<level>3</level>
+							<autoStart>true</autoStart>
+						</bundle>
+						<bundle>
+							<id>org.nasdanika.examples.bank.ui.driver.actors.impl</id>
+							<level>3</level>
+							<autoStart>true</autoStart>
+						</bundle>
 						<!-- 
 						<bundle>
 							<id>org.eclipse.osgi</id>
@@ -78,6 +92,7 @@
 							<autoStart>true</autoStart>
 						</bundle>
 					</bundleStartLevel>
+					<argLine>-Xmx512m -Dorg.osgi.service.http.port=8080</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

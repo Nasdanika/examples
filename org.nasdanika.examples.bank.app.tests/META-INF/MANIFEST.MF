@@ -6,5 +6,4 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Nasdanika LLC
 Fragment-Host: org.nasdanika.examples.bank.app;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.nasdanika.examples.bank.app.tests.actors.impl;bundle-version="0.1.0",
- org.nasdanika.examples.bank.app.tests.pages.impl;bundle-version="0.1.0"
+Require-Bundle: org.nasdanika.examples.bank.ui.driver.actors;bundle-version="0.1.0"
