@@ -156,7 +156,7 @@ public class StatementImpl extends CDOObjectImpl implements Statement {
 	
 	@RouteMethod(pattern="[^/]+/transactions\\.html")
 	public String transactionsTable(HttpContext context) throws Exception {
-		HTMLFactory htmlFactory = context.getHTMLFactory();
+		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		Table tTable = htmlFactory.table().striped().id("transactions");
 		Row hRow = tTable.row().style(Style.INFO);
 		hRow.header(htmlFactory.glyphicon(Glyphicon.calendar), " Date");

@@ -176,7 +176,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	
 	@RouteMethod(pattern="[^/]+\\.html")
 	public String home(HttpContext context) throws Exception {
-		HTMLFactory htmlFactory = context.getHTMLFactory();
+		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		String objectPath = context.getObjectPath(this);
 		ApplicationPanel appPanel = htmlFactory.applicationPanel()
 				.style(Style.INFO) // Guest INFO, Authenticated user - primary.

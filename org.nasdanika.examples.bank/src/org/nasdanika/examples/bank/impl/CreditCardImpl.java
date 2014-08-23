@@ -93,7 +93,7 @@ public class CreditCardImpl extends LoanAccountImpl implements CreditCard {
 		
 	@RouteMethod(pattern="[^/]+\\.html")
 	public String home(HttpContext context) throws Exception {
-		HTMLFactory htmlFactory = context.getHTMLFactory();
+		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		Table summaryTable = htmlFactory.table().striped();
 
 		Row currentBalanceRow = summaryTable.row();

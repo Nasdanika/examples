@@ -236,7 +236,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 
 	@RouteMethod(pattern="[^/]+\\.html")
 	public String home(HttpContext context) throws Exception {
-		HTMLFactory htmlFactory = context.getHTMLFactory();
+		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		ApplicationPanel appPanel = htmlFactory
 				.applicationPanel()
 				.width(800)
@@ -276,7 +276,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	
 	@RouteMethod(pattern="[^/]+/accounts\\.html")
 	public String accountsPanel(HttpContext context) throws Exception {
-		HTMLFactory htmlFactory = context.getHTMLFactory();
+		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		Table accountsTable = htmlFactory.table();
 		Row hRow = accountsTable.row().style(Style.INFO);
 		hRow.header("Account");

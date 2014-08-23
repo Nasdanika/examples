@@ -14,7 +14,7 @@ public class HomeRoute implements Route {
 
 	@Override
 	public Action execute(WebContext context) throws Exception {
-		final HTMLFactory htmlFactory = context.getHTMLFactory();
+		final HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 				
 		final AutoCloseable app = 
 			htmlFactory.routerApplication(

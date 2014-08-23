@@ -2,35 +2,25 @@
  */
 package org.nasdanika.examples.bank.impl;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 import org.nasdanika.cdo.CDOViewContext;
-import org.nasdanika.cdo.security.Action;
-import org.nasdanika.cdo.security.Group;
-import org.nasdanika.cdo.security.Permission;
 import org.nasdanika.cdo.security.Principal;
-import org.nasdanika.cdo.security.SecurityPackage;
 import org.nasdanika.cdo.security.User;
 import org.nasdanika.cdo.security.impl.LoginPasswordProtectionDomainImpl;
-import org.nasdanika.core.NasdanikaException;
 import org.nasdanika.examples.bank.BankPackage;
 import org.nasdanika.examples.bank.Customer;
 import org.nasdanika.examples.bank.Guest;
-import org.nasdanika.examples.bank.LoginPasswordCredentials;
 import org.nasdanika.examples.bank.Product;
 import org.nasdanika.examples.bank.SystemOfRecords;
-import org.nasdanika.web.RouteMethod;
+import org.nasdanika.html.HTMLFactory;
 import org.nasdanika.web.HttpContext;
+import org.nasdanika.web.RouteMethod;
 
 /**
  * <!-- begin-user-doc -->
@@ -191,9 +181,9 @@ public class SystemOfRecordsImpl extends LoginPasswordProtectionDomainImpl imple
 	public String customersList(HttpContext context) throws Exception {
 		List<Object> cList = new ArrayList<>();
 		for (Customer c: getCustomers()) {
-			cList.add(context.getHTMLFactory().link(context.getObjectPath(c)+".html", StringEscapeUtils.escapeHtml4(c.getName())));
+			cList.add(context.adapt(HTMLFactory.class).link(context.getObjectPath(c)+".html", StringEscapeUtils.escapeHtml4(c.getName())));
 		}
-		return context.getHTMLFactory().ol(cList).toString();
+		return context.adapt(HTMLFactory.class).ol(cList).toString();
 	}
 
 } //SystemOfRecordsImpl
