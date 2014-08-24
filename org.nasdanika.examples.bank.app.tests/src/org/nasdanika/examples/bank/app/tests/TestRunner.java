@@ -18,6 +18,8 @@ public class TestRunner implements IApplication {
 
         Result result = jUnitCore.run(Computer.serial(), BankTest.class);
         
+        java.awt.Toolkit.getDefaultToolkit().beep();
+        
         //System.out.println(result);
         
         return EXIT_OK;
