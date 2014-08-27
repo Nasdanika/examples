@@ -25,7 +25,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 @RunWith(NasdanikaWebTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Description("Tests of registration scenarios")
-public class SignUp implements WebTest {
+public class SignUp implements WebTest<WebDriver> {
 	
 	private static final String TEST_PASSWORD = "J0hn$D03";
 	private static final String TEST_CUSTOMER_NAME = "John Doe";
@@ -62,7 +62,7 @@ public class SignUp implements WebTest {
 	public void aHappyPath() throws Exception {
 		Guest guest = actorFactory.createGuest(getWebDriver());
 		guest.goHome();
-		Actor customer = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
+		Actor<WebDriver> customer = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
 		Assert.assertTrue(customer instanceof Customer);
 		Assert.assertTrue(customer.getCurrentPage() instanceof CustomerHome);
 		Assert.assertEquals(TEST_CUSTOMER_NAME, ((CustomerHome) customer.getCurrentPage()).getBanner());
@@ -72,7 +72,7 @@ public class SignUp implements WebTest {
 	public void duplicateId() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);	
 		Assert.assertTrue("Expected Guest, got "+actor, actor instanceof Guest);
 		Assert.assertTrue("Expected SignuUp dialog, got "+actor.getCurrentPage(), actor.getCurrentPage() instanceof SignUpDialog);
 		SignUpDialog signUpDialog = (SignUpDialog) actor.getCurrentPage();
@@ -90,7 +90,7 @@ public class SignUp implements WebTest {
 	public void blankId() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signUp(null, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signUp(null, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);	
 		Assert.assertTrue("Expected Guest, got "+actor, actor instanceof Guest);
 		Assert.assertTrue("Expected Sign-up dialog, got "+actor.getCurrentPage(), actor.getCurrentPage() instanceof SignUpDialog);
 		SignUpDialog signUpDialog = (SignUpDialog) actor.getCurrentPage();
@@ -113,7 +113,7 @@ public class SignUp implements WebTest {
 	public void blankPassword() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, null, TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, null, TEST_PASSWORD);	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof SignUpDialog);
 		SignUpDialog signUpDialog = (SignUpDialog) actor.getCurrentPage();
@@ -138,7 +138,7 @@ public class SignUp implements WebTest {
 	public void blankPasswordConfirm() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, null);	
+		Actor<WebDriver> actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, null);	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof SignUpDialog);
 		SignUpDialog signUpDialog = (SignUpDialog) actor.getCurrentPage();
@@ -151,7 +151,7 @@ public class SignUp implements WebTest {
 	public void passwordsDoNotMatch() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD+"x", TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD+"x", TEST_PASSWORD);	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof SignUpDialog);
 		SignUpDialog signUpDialog = (SignUpDialog) actor.getCurrentPage();

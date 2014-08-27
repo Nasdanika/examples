@@ -31,7 +31,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 @RunWith(NasdanikaParameterizedWebTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SignIn implements WebTest {
+public class SignIn implements WebTest<WebDriver> {
 	
 	public enum Browser { firefox, chrome, iexplorer }
 	
@@ -78,7 +78,7 @@ public class SignIn implements WebTest {
 	public void _SignUpCustomer() throws Exception {
 		Guest guest = actorFactory.createGuest(getWebDriver());
 		guest.goHome();
-		Actor customer = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
+		Actor<WebDriver> customer = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
 		Assert.assertTrue(customer instanceof Customer);
 		Assert.assertTrue(customer.getCurrentPage() instanceof CustomerHome);
 		Assert.assertEquals(TEST_CUSTOMER_NAME, ((CustomerHome) customer.getCurrentPage()).getBanner());
@@ -90,7 +90,7 @@ public class SignIn implements WebTest {
 	public void signIn() throws Exception {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signIn(TEST_ONLINE_ID, TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID, TEST_PASSWORD);	
 		Assert.assertTrue(actor instanceof Customer);
 		Assert.assertTrue(actor.getCurrentPage() instanceof CustomerHome);
 		Assert.assertEquals(TEST_CUSTOMER_NAME, ((CustomerHome) actor.getCurrentPage()).getBanner());
@@ -100,7 +100,7 @@ public class SignIn implements WebTest {
 	public void invalidCredentials() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signIn(TEST_ONLINE_ID, TEST_PASSWORD+"_1234");	
+		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID, TEST_PASSWORD+"_1234");	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof SignInFailedDialog);
 	}
@@ -109,7 +109,7 @@ public class SignIn implements WebTest {
 	public void emptyOnlineId() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signIn(null, TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signIn(null, TEST_PASSWORD);	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof GuestHome);
 	}
@@ -118,7 +118,7 @@ public class SignIn implements WebTest {
 	public void emptyPassword() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor actor = guest.signIn(TEST_ONLINE_ID, null);	
+		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID, null);	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof GuestHome);
 	}
