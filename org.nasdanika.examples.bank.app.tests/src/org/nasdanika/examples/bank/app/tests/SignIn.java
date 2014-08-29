@@ -129,5 +129,10 @@ public class SignIn implements WebTest<WebDriver> {
         driver.quit();	
         driver = null;
 	}
+
+	@Override
+	public long getScreenshotDelay() {
+		return 0;
+	}
 	
 }

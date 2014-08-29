@@ -171,5 +171,10 @@ public class SignUp implements WebTest<WebDriver> {
 	        driver = null;
 		}
 	}
+
+	@Override
+	public long getScreenshotDelay() {
+		return 0;
+	}
 	
 }
