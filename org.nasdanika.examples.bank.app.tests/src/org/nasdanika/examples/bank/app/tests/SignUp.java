@@ -18,9 +18,12 @@ import org.nasdanika.webtest.Actor;
 import org.nasdanika.webtest.ActorFactory;
 import org.nasdanika.webtest.Description;
 import org.nasdanika.webtest.NasdanikaWebTestRunner;
+import org.nasdanika.webtest.Screenshot;
 import org.nasdanika.webtest.WebTest;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 @RunWith(NasdanikaWebTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -44,6 +47,7 @@ public class SignUp implements WebTest<WebDriver> {
 	public void setUp() throws Exception {
         driver = new FirefoxDriver(); // new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
+        //driver.manage().window().setSize(new Dimension(640, 480));
         /* 
          * Explicit creation of page and actor factories - commented out as
          * it is taken care of by @ActorFactory annotation and service injection.
@@ -59,6 +63,7 @@ public class SignUp implements WebTest<WebDriver> {
 	
 	@Test
 	@Description("Successful registration")
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void aHappyPath() throws Exception {
 		Guest guest = actorFactory.createGuest(getWebDriver());
 		guest.goHome();
@@ -69,6 +74,7 @@ public class SignUp implements WebTest<WebDriver> {
 	}
 	
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void duplicateId() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -87,6 +93,7 @@ public class SignUp implements WebTest<WebDriver> {
 	}
 	
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void blankId() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -110,6 +117,7 @@ public class SignUp implements WebTest<WebDriver> {
 	}
 		
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void blankPassword() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -135,6 +143,7 @@ public class SignUp implements WebTest<WebDriver> {
 	}
 		
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void blankPasswordConfirm() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -148,6 +157,7 @@ public class SignUp implements WebTest<WebDriver> {
 	}
 		
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void passwordsDoNotMatch() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();

@@ -331,7 +331,7 @@ public class AppRoute implements Route {
 		body.content(htmlFactory.tag("div", "").style("min-height", "200px"));
 		
 		appPanel.contentPanel(
-				htmlFactory.alert(Style.SUCCESS, true, "Offer of the day")
+				htmlFactory.alert(Style.SUCCESS, true, "Offer of the day").id("offer-of-the-day")
 			).width(DeviceSize.LARGE, 2);
 		
 		body.content(

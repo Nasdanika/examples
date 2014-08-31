@@ -22,6 +22,7 @@ import org.nasdanika.webtest.Actor;
 import org.nasdanika.webtest.ActorFactory;
 import org.nasdanika.webtest.Description;
 import org.nasdanika.webtest.NasdanikaParameterizedWebTestRunner;
+import org.nasdanika.webtest.Screenshot;
 import org.nasdanika.webtest.Title;
 import org.nasdanika.webtest.WebTest;
 import org.openqa.selenium.WebDriver;
@@ -75,6 +76,7 @@ public class SignIn implements WebTest<WebDriver> {
 	@Test
 	@Title("Sign up a new customer")
 	@Description("Helper test - Creates a new customer account to use in tests.")
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void _SignUpCustomer() throws Exception {
 		Guest guest = actorFactory.createGuest(getWebDriver());
 		guest.goHome();
@@ -87,6 +89,7 @@ public class SignIn implements WebTest<WebDriver> {
 	@Test
 	@Title("Sign-In")
 	@Description("Tests successful sign-in")
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void signIn() throws Exception {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -97,6 +100,7 @@ public class SignIn implements WebTest<WebDriver> {
 	}
 	
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void invalidCredentials() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -106,6 +110,7 @@ public class SignIn implements WebTest<WebDriver> {
 	}
 
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void emptyOnlineId() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
@@ -115,6 +120,7 @@ public class SignIn implements WebTest<WebDriver> {
 	}
 
 	@Test
+	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void emptyPassword() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
