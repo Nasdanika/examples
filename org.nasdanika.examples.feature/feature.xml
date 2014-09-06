@@ -29,7 +29,11 @@
          version="0.0.0"/>
 
    <includes
-         id="org.nasdanika.server.third_party.feature"
+         id="org.nasdanika.cdo.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.nasdanika.equinox.feature"
          version="0.0.0"/>
 
    <plugin
