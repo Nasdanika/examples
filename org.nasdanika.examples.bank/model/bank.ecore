@@ -4,7 +4,7 @@
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
     <details key="documentation" value="This package contains bank classes.&#xD;&#xA;&#xD;&#xA;One more line."/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="SystemOfRecords" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//LoginPasswordProtectionDomain">
+  <eClassifiers xsi:type="ecore:EClass" name="SystemOfRecords" eSuperTypes="../../org.nasdanika.cdo.security/model/security.ecore#//LoginPasswordProtectionDomain ../../org.nasdanika.cdo.security/model/security.ecore#//ActionContainer">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;html>System of records is the &lt;b>root&lt;/b> of the model. Another sentence to be included &lt;I>only&lt;/I> in the detailed documentation, but not in summary.&lt;/html>"/>
     </eAnnotations>

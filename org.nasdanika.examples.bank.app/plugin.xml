@@ -10,6 +10,10 @@
                name="json-pretty-print"
                value="true">
          </init-param>
+         <init-param
+               name="default-access-decision"
+               value="deny">
+         </init-param>
       </servlet>
    </extension>
    <extension
@@ -59,6 +63,12 @@
             class="org.nasdanika.examples.bank.app.ProtectedActionsUIPart"
             target="org.eclipse.emf.ecore.EClass">
       </ui_part>
+   </extension>
+   <extension
+         point="org.nasdanika.cdo.security.security_policy">
+      <policy_resource
+            resource="bank.nasdanika_cdo_security">
+      </policy_resource>
    </extension>
 
 </plugin>

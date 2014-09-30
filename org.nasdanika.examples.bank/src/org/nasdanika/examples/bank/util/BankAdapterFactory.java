@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.nasdanika.cdo.security.ActionContainer;
 import org.nasdanika.cdo.security.LoginPasswordHashUser;
 import org.nasdanika.cdo.security.LoginPasswordProtectionDomain;
 import org.nasdanika.cdo.security.Principal;
@@ -136,6 +137,10 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLoginPasswordProtectionDomain(LoginPasswordProtectionDomain object) {
 				return createLoginPasswordProtectionDomainAdapter();
+			}
+			@Override
+			public Adapter caseActionContainer(ActionContainer object) {
+				return createActionContainerAdapter();
 			}
 			@Override
 			public Adapter casePrincipal(Principal object) {
@@ -404,6 +409,20 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLoginPasswordProtectionDomainAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.nasdanika.cdo.security.ActionContainer <em>Action Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.nasdanika.cdo.security.ActionContainer
+	 * @generated
+	 */
+	public Adapter createActionContainerAdapter() {
 		return null;
 	}
 

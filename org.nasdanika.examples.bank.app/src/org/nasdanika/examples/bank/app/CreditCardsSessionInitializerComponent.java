@@ -1,9 +1,5 @@
 package org.nasdanika.examples.bank.app;
 
-import java.math.BigDecimal;
-import java.text.MessageFormat;
-import java.util.Calendar;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import org.eclipse.emf.cdo.common.model.CDOPackageRegistry;
@@ -14,17 +10,14 @@ import org.eclipse.emf.cdo.transaction.CDOTransaction;
 import org.eclipse.emf.cdo.transaction.CDOTransactionHandler2;
 import org.eclipse.emf.cdo.util.CommitException;
 import org.nasdanika.cdo.CDOSessionInitializer;
+import org.nasdanika.cdo.security.Permission;
+import org.nasdanika.cdo.security.SecurityFactory;
 import org.nasdanika.cdo.security.SecurityPackage;
-import org.nasdanika.examples.bank.Account;
 import org.nasdanika.examples.bank.BankFactory;
 import org.nasdanika.examples.bank.BankPackage;
-import org.nasdanika.examples.bank.CreditCard;
-import org.nasdanika.examples.bank.Customer;
 import org.nasdanika.examples.bank.Guest;
-import org.nasdanika.examples.bank.PaymentProcessor;
 import org.nasdanika.examples.bank.Product;
 import org.nasdanika.examples.bank.SystemOfRecords;
-import org.nasdanika.examples.bank.TransactionType;
 
 public class CreditCardsSessionInitializerComponent implements CDOSessionInitializer {
 	
@@ -75,7 +68,16 @@ public class CreditCardsSessionInitializerComponent implements CDOSessionInitial
 				// Guest
 				Guest guest = BankFactory.eINSTANCE.createGuest();
 				sor.setGuest(guest);
-				sor.setUnauthenticatedPrincipal(guest);								
+				sor.setUnauthenticatedPrincipal(guest);		
+				
+				// Permission				
+				Permission permission = SecurityFactory.eINSTANCE.createPermission();
+				permission.setTarget(guest); // self-target
+				permission.setAllow(true);
+				permission.setName("*");
+				permission.setTargetClass("User");
+				permission.setTargetNamespaceURI("urn:org.nasdanika.cdo.security");
+				guest.getPermissions().add(permission);
 				
 				// Products
 				Product serenity = BankFactory.eINSTANCE.createProduct();

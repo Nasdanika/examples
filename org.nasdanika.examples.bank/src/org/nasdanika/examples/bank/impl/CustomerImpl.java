@@ -19,6 +19,7 @@ import org.nasdanika.cdo.security.Permission;
 import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.cdo.security.SecurityPackage;
+import org.nasdanika.cdo.security.SecurityPolicy;
 import org.nasdanika.core.AuthorizationProvider.AccessDecision;
 import org.nasdanika.core.Context;
 import org.nasdanika.examples.bank.Account;
@@ -32,9 +33,9 @@ import org.nasdanika.examples.bank.SystemOfRecords;
 import org.nasdanika.examples.bank.TransactionType;
 import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.ApplicationPanel.ContentPanel;
-import org.nasdanika.html.HTMLFactory.Glyphicon;
 import org.nasdanika.html.Fragment;
 import org.nasdanika.html.HTMLFactory;
+import org.nasdanika.html.HTMLFactory.Glyphicon;
 import org.nasdanika.html.Navbar;
 import org.nasdanika.html.Table;
 import org.nasdanika.html.Table.Row;
@@ -53,8 +54,10 @@ import org.nasdanika.web.RouteMethod;
  * <ul>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getMemberOf <em>Member Of</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getPermissions <em>Permissions</em>}</li>
+ *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getProtectionDomain <em>Protection Domain</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getLogin <em>Login</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getPasswordHash <em>Password Hash</em>}</li>
+ *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getAccounts <em>Accounts</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getName <em>Name</em>}</li>
  * </ul>
@@ -112,6 +115,15 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	@SuppressWarnings("unchecked")
 	public EList<Permission> getPermissions() {
 		return (EList<Permission>)eGet(SecurityPackage.Literals.PRINCIPAL__PERMISSIONS, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public ProtectionDomain<?> getProtectionDomain() {
+		return (ProtectionDomain<?>) eContainer(); //(ProtectionDomain<?>)eGet(SecurityPackage.Literals.PRINCIPAL__PROTECTION_DOMAIN, true);
 	}
 
 	/**
@@ -183,6 +195,24 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isDisabled() {
+		return (Boolean)eGet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__DISABLED, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDisabled(boolean newDisabled) {
+		eSet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__DISABLED, newDisabled);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void sendMessage(Principal from, String subject, String bodyMimeType, Object body) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -211,32 +241,23 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 		throw new UnsupportedOperationException();
 	}
 
-	private AuthorizationHelper authorizationHelper = new AuthorizationHelper() {
-		
-		@Override
-		protected Principal getPrincipal() {
-			return CustomerImpl.this;
-		}
-		
-		@Override
-		protected ProtectionDomain<?> getProtectionDomain() {
-			return (ProtectionDomain<?>) CustomerImpl.this.eContainer();
-		}
-		
-	};
+	private AuthorizationHelper authorizationHelper = new AuthorizationHelper(this);
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public AccessDecision authorize(Context context, EObject target, String action, String qualifier, Map<String, Object> environment) {
-		return authorizationHelper.authorize(context, target, action, qualifier, environment);
+	public AccessDecision authorize(SecurityPolicy securityPolicy, Context context, EObject target, String action, String qualifier, Map<String, Object> environment) {
+		return authorizationHelper.authorize(securityPolicy, context, target, action, qualifier, environment);
 	}
 
 	@RouteMethod(pattern="[^/]+\\.html")
 	public String home(HttpContext context) throws Exception {
 		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
+		if (!context.authorize(this, "read", null, null)) {
+			return "Access denied!"; 
+		}
 		ApplicationPanel appPanel = htmlFactory
 				.applicationPanel()
 				.width(800)
@@ -277,6 +298,9 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	@RouteMethod(pattern="[^/]+/accounts\\.html")
 	public String accountsPanel(HttpContext context) throws Exception {
 		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
+		if (!context.authorize(this, "read", null, null)) {
+			return htmlFactory.alert(Style.DANGER, false, "Access Denied!").toString(); 
+		}		
 		Table accountsTable = htmlFactory.table();
 		Row hRow = accountsTable.row().style(Style.INFO);
 		hRow.header("Account");

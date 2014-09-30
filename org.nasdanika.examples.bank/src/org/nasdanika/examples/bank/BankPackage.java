@@ -74,24 +74,6 @@ public interface BankPackage extends EPackage {
 	int SYSTEM_OF_RECORDS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SYSTEM_OF_RECORDS__ACTIONS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN__ACTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SYSTEM_OF_RECORDS__GROUPS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN__GROUPS;
-
-	/**
 	 * The feature id for the '<em><b>Super Users Group</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,13 +101,22 @@ public interface BankPackage extends EPackage {
 	int SYSTEM_OF_RECORDS__EVERYONE_GROUP = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN__EVERYONE_GROUP;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYSTEM_OF_RECORDS__ACTIONS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS__ID = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 0;
+	int SYSTEM_OF_RECORDS__ID = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -134,7 +125,7 @@ public interface BankPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS__NAME = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 1;
+	int SYSTEM_OF_RECORDS__NAME = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -143,7 +134,7 @@ public interface BankPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS__DESCRIPTION = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 2;
+	int SYSTEM_OF_RECORDS__DESCRIPTION = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Customers</b></em>' containment reference list.
@@ -152,7 +143,7 @@ public interface BankPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS__CUSTOMERS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 3;
+	int SYSTEM_OF_RECORDS__CUSTOMERS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Products</b></em>' containment reference list.
@@ -161,7 +152,7 @@ public interface BankPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS__PRODUCTS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 4;
+	int SYSTEM_OF_RECORDS__PRODUCTS = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Guest</b></em>' containment reference.
@@ -170,7 +161,7 @@ public interface BankPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS__GUEST = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 5;
+	int SYSTEM_OF_RECORDS__GUEST = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>System Of Records</em>' class.
@@ -179,7 +170,7 @@ public interface BankPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYSTEM_OF_RECORDS_FEATURE_COUNT = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 6;
+	int SYSTEM_OF_RECORDS_FEATURE_COUNT = SecurityPackage.LOGIN_PASSWORD_PROTECTION_DOMAIN_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.nasdanika.examples.bank.impl.CustomerImpl <em>Customer</em>}' class.
@@ -210,6 +201,15 @@ public interface BankPackage extends EPackage {
 	int CUSTOMER__PERMISSIONS = SecurityPackage.LOGIN_PASSWORD_HASH_USER__PERMISSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Protection Domain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__PROTECTION_DOMAIN = SecurityPackage.LOGIN_PASSWORD_HASH_USER__PROTECTION_DOMAIN;
+
+	/**
 	 * The feature id for the '<em><b>Login</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,6 +226,15 @@ public interface BankPackage extends EPackage {
 	 * @ordered
 	 */
 	int CUSTOMER__PASSWORD_HASH = SecurityPackage.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__DISABLED = SecurityPackage.LOGIN_PASSWORD_HASH_USER__DISABLED;
 
 	/**
 	 * The feature id for the '<em><b>Accounts</b></em>' containment reference list.
@@ -1202,6 +1211,15 @@ public interface BankPackage extends EPackage {
 	 * @ordered
 	 */
 	int GUEST__PERMISSIONS = SecurityPackage.USER__PERMISSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Protection Domain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUEST__PROTECTION_DOMAIN = SecurityPackage.USER__PROTECTION_DOMAIN;
 
 	/**
 	 * The number of structural features of the '<em>Guest</em>' class.

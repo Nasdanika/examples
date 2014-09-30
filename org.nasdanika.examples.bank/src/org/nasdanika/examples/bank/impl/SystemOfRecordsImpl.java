@@ -10,7 +10,10 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.nasdanika.cdo.CDOViewContext;
+import org.nasdanika.cdo.security.Action;
+import org.nasdanika.cdo.security.ActionContainer;
 import org.nasdanika.cdo.security.Principal;
+import org.nasdanika.cdo.security.SecurityPackage;
 import org.nasdanika.cdo.security.User;
 import org.nasdanika.cdo.security.impl.LoginPasswordProtectionDomainImpl;
 import org.nasdanika.examples.bank.BankPackage;
@@ -29,6 +32,7 @@ import org.nasdanika.web.RouteMethod;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.nasdanika.examples.bank.impl.SystemOfRecordsImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.SystemOfRecordsImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.SystemOfRecordsImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.SystemOfRecordsImpl#getDescription <em>Description</em>}</li>
@@ -60,6 +64,16 @@ public class SystemOfRecordsImpl extends LoginPasswordProtectionDomainImpl imple
 	@Override
 	protected EClass eStaticClass() {
 		return BankPackage.Literals.SYSTEM_OF_RECORDS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<Action> getActions() {
+		return (EList<Action>)eGet(SecurityPackage.Literals.ACTION_CONTAINER__ACTIONS, true);
 	}
 
 	/**
@@ -152,6 +166,38 @@ public class SystemOfRecordsImpl extends LoginPasswordProtectionDomainImpl imple
 	 */
 	public void setGuest(Guest newGuest) {
 		eSet(BankPackage.Literals.SYSTEM_OF_RECORDS__GUEST, newGuest);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ActionContainer.class) {
+			switch (derivedFeatureID) {
+				case BankPackage.SYSTEM_OF_RECORDS__ACTIONS: return SecurityPackage.ACTION_CONTAINER__ACTIONS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ActionContainer.class) {
+			switch (baseFeatureID) {
+				case SecurityPackage.ACTION_CONTAINER__ACTIONS: return BankPackage.SYSTEM_OF_RECORDS__ACTIONS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

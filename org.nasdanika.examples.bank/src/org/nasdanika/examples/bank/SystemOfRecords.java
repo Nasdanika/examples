@@ -5,6 +5,7 @@ package org.nasdanika.examples.bank;
 import org.eclipse.emf.cdo.CDOObject;
 
 import org.eclipse.emf.common.util.EList;
+import org.nasdanika.cdo.security.ActionContainer;
 import org.nasdanika.cdo.security.LoginPasswordProtectionDomain;
 import org.nasdanika.cdo.security.ProtectionDomain;
 
@@ -33,7 +34,7 @@ import org.nasdanika.cdo.security.ProtectionDomain;
  * @model
  * @generated
  */
-public interface SystemOfRecords extends LoginPasswordProtectionDomain {
+public interface SystemOfRecords extends LoginPasswordProtectionDomain, ActionContainer {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

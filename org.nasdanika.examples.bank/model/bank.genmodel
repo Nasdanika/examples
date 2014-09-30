@@ -75,6 +75,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bank.ecore#//Statement/closingBalance"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute bank.ecore#//Statement/closingDate"/>
     </genClasses>
-    <genClasses ecoreClass="bank.ecore#//Guest"/>
+    <genClasses ecoreClass="bank.ecore#//Guest">
+      <genOperations ecoreOperation="bank.ecore#//Guest/testOp">
+        <genParameters ecoreParameter="bank.ecore#//Guest/testOp/p1"/>
+        <genParameters ecoreParameter="bank.ecore#//Guest/testOp/p2"/>
+      </genOperations>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

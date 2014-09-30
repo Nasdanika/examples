@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -841,6 +842,7 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 
 		// Add supertypes to classes
 		systemOfRecordsEClass.getESuperTypes().add(theSecurityPackage.getLoginPasswordProtectionDomain());
+		systemOfRecordsEClass.getESuperTypes().add(theSecurityPackage.getActionContainer());
 		customerEClass.getESuperTypes().add(theSecurityPackage.getLoginPasswordHashUser());
 		internalTransactionEClass.getESuperTypes().add(this.getTransaction());
 		externalTransactionEClass.getESuperTypes().add(this.getTransaction());
@@ -919,6 +921,10 @@ public class BankPackageImpl extends EPackageImpl implements BankPackage {
 		initEAttribute(getStatement_ClosingDate(), ecorePackage.getEDate(), "closingDate", null, 0, 1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guestEClass, Guest.class, "Guest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		EOperation op = addEOperation(guestEClass, ecorePackage.getEString(), "testOp", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "p1", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "p2", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(transactionTypeEEnum, TransactionType.class, "TransactionType");

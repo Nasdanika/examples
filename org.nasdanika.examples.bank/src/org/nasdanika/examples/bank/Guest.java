@@ -15,4 +15,12 @@ import org.nasdanika.cdo.security.User;
  * @generated
  */
 public interface Guest extends User {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String testOp(String p1, int p2);
 } // Guest

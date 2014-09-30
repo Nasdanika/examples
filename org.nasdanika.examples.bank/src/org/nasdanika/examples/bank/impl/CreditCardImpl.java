@@ -94,6 +94,10 @@ public class CreditCardImpl extends LoanAccountImpl implements CreditCard {
 	@RouteMethod(pattern="[^/]+\\.html")
 	public String home(HttpContext context) throws Exception {
 		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
+		if (!context.authorize(this, "read", null, null)) {
+			return htmlFactory.alert(Style.DANGER, false, "Access Denied!").toString(); 
+		}
+		
 		Table summaryTable = htmlFactory.table().striped();
 
 		Row currentBalanceRow = summaryTable.row();

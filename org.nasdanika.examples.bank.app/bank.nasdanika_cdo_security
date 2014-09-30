@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.nasdanika.cdo.security:SecurityPolicyContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.nasdanika.cdo.security="urn:org.nasdanika.cdo.security">
+  <actions name="*" targetNamespaceURI="urn:org.nasdanika.cdo.security" targetClass="User" grantable="true">
+    <pathPatterns>.+</pathPatterns>
+  </actions>
+</org.nasdanika.cdo.security:SecurityPolicyContainer>

@@ -22,7 +22,9 @@ import org.nasdanika.cdo.security.LoginPasswordHashUser;
 import org.nasdanika.cdo.security.Permission;
 import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
+import org.nasdanika.cdo.security.SecurityFactory;
 import org.nasdanika.cdo.security.SecurityPackage;
+import org.nasdanika.cdo.security.SecurityPolicy;
 import org.nasdanika.cdo.security.User;
 import org.nasdanika.core.AuthorizationProvider.AccessDecision;
 import org.nasdanika.core.Context;
@@ -59,6 +61,7 @@ import org.nasdanika.web.RouteMethod;
  * <ul>
  *   <li>{@link org.nasdanika.examples.bank.impl.GuestImpl#getMemberOf <em>Member Of</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.GuestImpl#getPermissions <em>Permissions</em>}</li>
+ *   <li>{@link org.nasdanika.examples.bank.impl.GuestImpl#getProtectionDomain <em>Protection Domain</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,6 +122,15 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public ProtectionDomain<?> getProtectionDomain() {
+		return (ProtectionDomain<?>) eContainer(); //(ProtectionDomain<?>)eGet(SecurityPackage.Literals.PRINCIPAL__PROTECTION_DOMAIN, true);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public void sendMessage(Principal from, String subject, String bodyMimeType, Object body) {
 		// NOP
 	}
@@ -141,18 +153,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		// NOP
 	}
 
-	private AuthorizationHelper authorizationHelper = new AuthorizationHelper() {
-		
-		@Override
-		protected ProtectionDomain<?> getProtectionDomain() {
-			return (ProtectionDomain<?>) GuestImpl.this.eContainer();
-		}
-		
-		@Override
-		protected Principal getPrincipal() {
-			return GuestImpl.this;
-		}
-	};
+	private AuthorizationHelper authorizationHelper = new AuthorizationHelper(this);
 		
 	/**
 	 * <!-- begin-user-doc -->
@@ -168,8 +169,8 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public AccessDecision authorize(Context context, EObject target, String action, String qualifier, Map<String, Object> environment) {
-		return authorizationHelper.authorize(context, target, action, qualifier, environment);
+	public AccessDecision authorize(SecurityPolicy securityPolicy, Context context, EObject target, String action, String qualifier, Map<String, Object> environment) {
+		return authorizationHelper.authorize(securityPolicy, context, target, action, qualifier, environment);
 	}
 	
 	// --- Route methods ---
@@ -181,7 +182,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		ApplicationPanel appPanel = htmlFactory.applicationPanel()
 				.style(Style.INFO) // Guest INFO, Authenticated user - primary.
 				.header(StringEscapeUtils.escapeHtml4(((SystemOfRecords) eContainer()).getName()))
-				.width(800)
+				.width(1000)
 				.minHeight(600)
 				.headerLink("/index.html")
 				.footer(
@@ -374,6 +375,15 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 				newCustomer.setName(name);
 				systemOfRecords.setPasswordHash(newCustomer, password);
 				systemOfRecords.getCustomers().add(newCustomer);
+				
+				// Permission				
+				Permission permission = SecurityFactory.eINSTANCE.createPermission();
+				permission.setTarget(newCustomer); // self-target
+				permission.setAllow(true);
+				permission.setName("*");
+				permission.setTargetClass("User");
+				permission.setTargetNamespaceURI("urn:org.nasdanika.cdo.security");
+				newCustomer.getPermissions().add(permission);				
 				
 				((CustomerImpl) newCustomer).init();
 				
