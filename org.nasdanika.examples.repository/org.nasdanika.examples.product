@@ -3,6 +3,7 @@
 
 <product name="Nasdanika Foundation Server with examples" uid="org.nasdanika.examples" version="0.1.0.qualifier" useFeatures="true" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -17,12 +18,14 @@
 
    <windowImages/>
 
+
    <launcher>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
       <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</windows>
@@ -37,10 +40,15 @@
 
    <features>
       <feature id="org.nasdanika.examples.feature" version="0.1.0.qualifier"/>
+      <feature id="org.nasdanika.third_party"/>
+      <feature id="org.nasdanika.server.jetty.feature"/>
+      <feature id="org.nasdanika.html.feature"/>
+      <feature id="org.nasdanika.feature"/>
+      <feature id="org.nasdanika.equinox.feature"/>
+      <feature id="org.nasdanika.cdo.feature"/>
    </features>
 
    <configurations>
-      <plugin id="org.apache.felix.webconsole" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="1" />
@@ -49,5 +57,9 @@
       <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
       <plugin id="org.nasdanika.examples.bank.app" autoStart="true" startLevel="0" />
    </configurations>
+
+   <repositories>
+      <repository location="http://www.nasdanika.org/server/repository/" enabled="true" />
+   </repositories>
 
 </product>
