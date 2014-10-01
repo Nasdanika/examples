@@ -38,7 +38,7 @@ public class AppRouteDemo implements WebTest<WebDriver> {
 	@Before
 	public void setUp() throws Exception {
         driver = new FirefoxDriver(); // new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 	}
 	
 	@Test
@@ -46,7 +46,7 @@ public class AppRouteDemo implements WebTest<WebDriver> {
 	@Screenshot({Screenshot.When.AFTER, Screenshot.When.EXCEPTION})
 	public void appRoute() throws Exception {
 		getWebDriver().get("http://localhost:8080/router/app.html");
-		new WebDriverWait(getWebDriver(), 3).until(ExpectedConditions.visibilityOfElementLocated(By.id("offer-of-the-day")));		
+		new WebDriverWait(getWebDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.id("offer-of-the-day")));		
 	}
 	
 	@After
