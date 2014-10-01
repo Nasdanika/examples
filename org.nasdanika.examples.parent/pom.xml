@@ -17,9 +17,8 @@
 		<tycho-version>0.21.0</tycho-version>
 		<luna-repo.url>http://download.eclipse.org/releases/luna</luna-repo.url>
 	</properties>
-
+	 
 	<repositories>
-		<!-- configure p2 repository to resolve against -->
 		<repository>
 			<id>luna</id>
 			<url>${luna-repo.url}</url>
@@ -51,7 +50,8 @@
 			<layout>p2</layout>
 		</repository>
 	</repositories>
-	<build>
+ 	
+ 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -71,6 +71,13 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<target>
+						<artifact>
+							<groupId>org.nasdanika.examples</groupId>
+							<artifactId>org.nasdanika.examples.target</artifactId>
+							<version>0.1.0-SNAPSHOT</version>
+						</artifact>
+					</target>
 					<pomDependencies>consider</pomDependencies>
 					<!-- configure the p2 target environments for multi-platform build -->
 					<environments>
@@ -107,6 +114,7 @@
 		<module>../org.nasdanika.examples.bank</module>
 		<module>../org.nasdanika.examples.bank.app</module>
 		<module>../org.nasdanika.examples.bank.app.tests</module>
+		<module>../org.nasdanika.examples.target</module>
 		<module>../org.nasdanika.examples.feature</module>
 		<module>../org.nasdanika.examples.repository</module>
 	</modules>
