@@ -160,8 +160,14 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String testOp(String p1, int p2) {
-		return "Hello, "+p1+", "+p2+" times!!!";
+	public AccessDecision authorize(
+			SecurityPolicy securityPolicy, 
+			Context context, 
+			Object target, 
+			String action, 
+			String qualifier, 
+			Map<String, Object> environment) {
+		return authorizationHelper.authorize(securityPolicy, context, target, action, qualifier, environment);
 	}
 	
 	/**
@@ -169,8 +175,8 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public AccessDecision authorize(SecurityPolicy securityPolicy, Context context, EObject target, String action, String qualifier, Map<String, Object> environment) {
-		return authorizationHelper.authorize(securityPolicy, context, target, action, qualifier, environment);
+	public String testOp(String p1, int p2) {
+		return "Hello, "+p1+", "+p2+" times!!!";
 	}
 	
 	// --- Route methods ---

@@ -248,7 +248,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public AccessDecision authorize(SecurityPolicy securityPolicy, Context context, EObject target, String action, String qualifier, Map<String, Object> environment) {
+	public AccessDecision authorize(SecurityPolicy securityPolicy, Context context, Object target, String action, String qualifier, Map<String, Object> environment) {
 		return authorizationHelper.authorize(securityPolicy, context, target, action, qualifier, environment);
 	}
 
@@ -256,7 +256,7 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	public String home(HttpContext context) throws Exception {
 		HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		if (!context.authorize(this, "read", null, null)) {
-			return "Access denied!"; 
+			return "Access denied!"; 			
 		}
 		ApplicationPanel appPanel = htmlFactory
 				.applicationPanel()
