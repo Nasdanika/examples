@@ -3,4 +3,8 @@
   <actions name="*" targetNamespaceURI="urn:org.nasdanika.cdo.security" targetClass="User" grantable="true">
     <pathPatterns>.+</pathPatterns>
   </actions>
+  <actions name="read" targetNamespaceURI="urn:org.nasdanika.examples.bank" targetClass="Product"/>
+  <actions name="invoke" targetNamespaceURI="java://org.nasdanika.examples.bank.app" targetClass="TestService">
+    <pathPatterns>.+</pathPatterns>
+  </actions>
 </org.nasdanika.cdo.security:SecurityPolicyContainer>

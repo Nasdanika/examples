@@ -70,14 +70,28 @@ public class CreditCardsSessionInitializerComponent implements CDOSessionInitial
 				sor.setGuest(guest);
 				sor.setUnauthenticatedPrincipal(guest);		
 				
-				// Permission				
-				Permission permission = SecurityFactory.eINSTANCE.createPermission();
-				permission.setTarget(guest); // self-target
-				permission.setAllow(true);
-				permission.setName("*");
-				permission.setTargetClass("User");
-				permission.setTargetNamespaceURI("urn:org.nasdanika.cdo.security");
-				guest.getPermissions().add(permission);
+				// Permissions				
+				Permission productPermission = SecurityFactory.eINSTANCE.createPermission();
+				productPermission.setAllow(true);
+				productPermission.setName("read");
+				productPermission.setTargetClass("Product");
+				productPermission.setTargetNamespaceURI("urn:org.nasdanika.examples.bank");
+				guest.getPermissions().add(productPermission);
+				
+				Permission servicePermission = SecurityFactory.eINSTANCE.createPermission();
+				servicePermission.setAllow(true);
+				servicePermission.setName("invoke");
+				servicePermission.setTargetClass("TestService");
+				servicePermission.setTargetNamespaceURI("java://org.nasdanika.examples.bank.app");
+				guest.getPermissions().add(servicePermission);				
+				
+				Permission userPermission = SecurityFactory.eINSTANCE.createPermission();
+				userPermission.setTarget(guest); // self-target
+				userPermission.setAllow(true);
+				userPermission.setName("*");
+				userPermission.setTargetClass("User");
+				userPermission.setTargetNamespaceURI("urn:org.nasdanika.cdo.security");
+				guest.getPermissions().add(userPermission);
 				
 				// Products
 				Product serenity = BankFactory.eINSTANCE.createProduct();

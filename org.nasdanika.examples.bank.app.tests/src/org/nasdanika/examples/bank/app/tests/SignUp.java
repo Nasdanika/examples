@@ -9,28 +9,26 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.nasdanika.examples.bank.ui.driver.pages.customer.CustomerHome;
-import org.nasdanika.examples.bank.ui.driver.pages.guest.SignUpDialog;
 import org.nasdanika.examples.bank.ui.driver.actors.BankActorFactory;
 import org.nasdanika.examples.bank.ui.driver.actors.Customer;
 import org.nasdanika.examples.bank.ui.driver.actors.Guest;
+import org.nasdanika.examples.bank.ui.driver.pages.customer.CustomerHome;
+import org.nasdanika.examples.bank.ui.driver.pages.guest.SignUpDialog;
 import org.nasdanika.webtest.Actor;
 import org.nasdanika.webtest.ActorFactory;
 import org.nasdanika.webtest.Description;
 import org.nasdanika.webtest.NasdanikaWebTestRunner;
 import org.nasdanika.webtest.Screenshot;
 import org.nasdanika.webtest.WebTest;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 @RunWith(NasdanikaWebTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Description("Tests of registration scenarios")
+@Description("Tests of sign-up scenarios")
 public class SignUp implements WebTest<WebDriver> {
 	
-	private static final String TEST_PASSWORD = "J0hn$D03";
+	private static final String TEST_PASSWORD = "J123_D45";
 	private static final String TEST_CUSTOMER_NAME = "John Doe";
 	private static final String TEST_ONLINE_ID = "jDoe";
 	private WebDriver driver;
@@ -47,18 +45,6 @@ public class SignUp implements WebTest<WebDriver> {
 	public void setUp() throws Exception {
         driver = new FirefoxDriver(); // new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
-        //driver.manage().window().setSize(new Dimension(640, 480));
-        /* 
-         * Explicit creation of page and actor factories - commented out as
-         * it is taken care of by @ActorFactory annotation and service injection.
-         * keeping it here for the sake of demonstrating how to do it.
-         */
-//      BankPageFactoryImpl pageFactoryImpl = new BankPageFactoryImpl();
-//      pageFactoryImpl.setBaseURL("http://localhost:8080");
-//		BankPageFactory pageFactory = NasdanikaWebTestRunner.proxyPageFactory(pageFactoryImpl);
-//      BankActorFactoryImpl actorFactoryImpl = new BankActorFactoryImpl();
-//      actorFactoryImpl.setPageFactory(pageFactory);
-//		actorFactory = NasdanikaWebTestRunner.proxyActorFactory(actorFactoryImpl);
 	}
 	
 	@Test

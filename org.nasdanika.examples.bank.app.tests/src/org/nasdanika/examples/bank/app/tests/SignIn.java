@@ -47,7 +47,7 @@ public class SignIn implements WebTest<WebDriver> {
 	
 	private static final String TEST_ONLINE_ID = "janeDoe";
 	private static final String TEST_CUSTOMER_NAME = "Jane Doe";
-	private static final String TEST_PASSWORD = "J@ne$D03";
+	private static final String TEST_PASSWORD = "J123_D45";
 	
 	private WebDriver driver;
 	

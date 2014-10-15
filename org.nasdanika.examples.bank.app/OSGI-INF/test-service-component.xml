@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="Test Service Component">
+   <implementation class="org.nasdanika.examples.bank.app.TestServiceComponent"/>
+   <service>
+      <provide interface="org.nasdanika.examples.bank.app.TestService"/>
+   </service>
+</scr:component>
