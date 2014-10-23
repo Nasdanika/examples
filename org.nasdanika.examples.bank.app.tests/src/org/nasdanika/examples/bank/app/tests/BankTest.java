@@ -7,7 +7,7 @@ import org.nasdanika.webtest.Title;
 
 @RunWith(NasdanikaWebTestSuite.class)
 @Title("Nasdanika Bank Web Tests Report")
-@SuiteClasses({AppRouteDemo.class, SignUp.class, SignIn.class})
+@SuiteClasses({AppRouteDemo.class /*, SignUp.class, SignIn.class*/})
 public class BankTest {
 	
 }

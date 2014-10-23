@@ -57,11 +57,8 @@
    </extension>
    <extension
          point="org.nasdanika.web.html_factory">
-      <default_html_factory>
-            <stylesheet>/bootstrap/css/bootstrap.min.css</stylesheet>
-            <stylesheet>
-               /bootstrap/css/bootstrap-theme.min.css
-            </stylesheet>
+      <default_html_factory
+            bootstrapCssContainer="/bootstrap/css">
             <script>
                /js/jquery-2.1.0.min.js
             </script>

@@ -35,6 +35,7 @@ import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.ApplicationPanel.ContentPanel;
 import org.nasdanika.html.Fragment;
 import org.nasdanika.html.HTMLFactory;
+import org.nasdanika.html.Theme;
 import org.nasdanika.html.HTMLFactory.Glyphicon;
 import org.nasdanika.html.Navbar;
 import org.nasdanika.html.Table;
@@ -288,7 +289,8 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 		}
 		
 		appPanel.footer(htmlFactory.link("#", "Contact Us"));
-		return htmlFactory.routerApplication(
+		return htmlFactory.bootstrapRouterApplication(
+				Theme.Default,
 				"Nasdanika Bank", 
 				"main/"+context.getObjectPath(this)+"/accounts.html", 
 				null, 

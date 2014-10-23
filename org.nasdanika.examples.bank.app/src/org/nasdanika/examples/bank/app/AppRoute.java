@@ -10,6 +10,7 @@ import org.nasdanika.html.Breadcrumbs;
 import org.nasdanika.html.Button;
 import org.nasdanika.html.Carousel;
 import org.nasdanika.html.Form;
+import org.nasdanika.html.Theme;
 import org.nasdanika.html.FormGroup.Status;
 import org.nasdanika.html.FormInputGroup;
 import org.nasdanika.html.Fragment;
@@ -27,6 +28,7 @@ import org.nasdanika.html.UIElement.Event;
 import org.nasdanika.html.UIElement.Size;
 import org.nasdanika.html.UIElement.Style;
 import org.nasdanika.web.Action;
+import org.nasdanika.web.HttpContext;
 import org.nasdanika.web.Route;
 import org.nasdanika.web.WebContext;
 
@@ -355,8 +357,11 @@ public class AppRoute implements Route {
 						}, 						 
 						null));
 		
+		String themeName = ((HttpContext) context).getRequest().getParameter("theme");
+		
 		final AutoCloseable app = 
-			htmlFactory.routerApplication(
+			htmlFactory.bootstrapRouterApplication(
+				themeName == null ? null : Theme.valueOf(themeName), 
 				"My Application", 
 				null, 
 				null, 

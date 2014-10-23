@@ -45,6 +45,7 @@ import org.nasdanika.html.HTMLFactory.InputType;
 import org.nasdanika.html.Input;
 import org.nasdanika.html.Modal;
 import org.nasdanika.html.Navbar;
+import org.nasdanika.html.Theme;
 import org.nasdanika.html.UIElement.DeviceSize;
 import org.nasdanika.html.UIElement.Event;
 import org.nasdanika.html.UIElement.Style;
@@ -302,7 +303,14 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 				.title("Sign up to online banking")
 				.body(signupForm);
 				
-		return htmlFactory.routerApplication("Nasdanika Bank", null, null, appPanel, signupFormModal, authenticationFailedModal).toString();
+		return htmlFactory.bootstrapRouterApplication(
+				Theme.Default,
+				"Nasdanika Bank", 
+				null, 
+				null, 
+				appPanel, 
+				signupFormModal, 
+				authenticationFailedModal).toString();
 		
 	}
 	
