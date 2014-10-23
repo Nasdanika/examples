@@ -2,15 +2,15 @@
 <?pde version="3.8"?><target includeMode="feature" name="org.nasdanika.examples.target" sequenceNumber="3">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.examples.bank.ui.driver.feature.feature.group" version="0.1.0.201410151310"/>
+<unit id="org.nasdanika.examples.bank.ui.driver.feature.feature.group"/>
 <repository location="http://www.nasdanika.org/examples-bank-ui-driver/repository"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.server.jetty.feature.feature.group" version="0.1.0.201410151225"/>
-<unit id="org.nasdanika.feature.feature.group" version="0.1.0.201410151225"/>
-<unit id="org.nasdanika.equinox.feature.feature.group" version="0.1.0.201410151225"/>
-<unit id="org.nasdanika.html.feature.feature.group" version="1.2.0.201410151225"/>
-<unit id="org.nasdanika.cdo.feature.feature.group" version="0.1.0.201410151225"/>
+<unit id="org.nasdanika.server.jetty.feature.feature.group"/>
+<unit id="org.nasdanika.feature.feature.group"/>
+<unit id="org.nasdanika.equinox.feature.feature.group"/>
+<unit id="org.nasdanika.html.feature.feature.group"/>
+<unit id="org.nasdanika.cdo.feature.feature.group"/>
 <repository location="http://www.nasdanika.org/server/repository"/>
 </location>
 </locations>

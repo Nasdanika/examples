@@ -1,7 +1,9 @@
 package org.nasdanika.examples.bank.app.tests;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -31,7 +33,11 @@ public class AppRouteDemo implements WebTest<WebDriver> {
 		
 	@Parameters(name="{index}: {0}")
 	public static Collection<Object[]> registrationData() {
-		return Arrays.asList(new Object[][] { Theme.values() } );
+		List<Object[]> ret = new ArrayList<>();
+		for (Theme theme: Theme.values()) {
+			ret.add(new Object[] { theme });
+		}
+		return ret;
 	}
 	
 	@Parameter
