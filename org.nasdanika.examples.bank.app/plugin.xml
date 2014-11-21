@@ -70,6 +70,9 @@
             <script>
                /js/require.js
             </script>
+            <stylesheet>
+               /font-awesome-4.2.0/css/font-awesome.min.css
+            </stylesheet>
       </default_html_factory>
    </extension>
    <extension

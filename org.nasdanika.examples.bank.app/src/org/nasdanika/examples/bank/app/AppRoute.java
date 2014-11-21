@@ -9,6 +9,7 @@ import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.Breadcrumbs;
 import org.nasdanika.html.Button;
 import org.nasdanika.html.Carousel;
+import org.nasdanika.html.FontAwesome.WebApplication;
 import org.nasdanika.html.Form;
 import org.nasdanika.html.Theme;
 import org.nasdanika.html.FormGroup.Status;
@@ -239,6 +240,17 @@ public class AppRoute implements Route {
 		creditCardGroup.rightButton("Stored cards")
 			.item(htmlFactory.link("#", "Visa-1234"))
 			.item(htmlFactory.link("#", "Master Card-6789")).style(Style.DANGER);
+		
+		FormInputGroup eMailFormInputGroup = form.formInputGroup(
+				"E-Mail", 
+				"eMail", 
+				htmlFactory.input(InputType.password).name("eMail").id("eMail").placeholder("E-Mail"),
+				"Enter e-mail").status(Status.SUCCESS);
+		
+//		eMailFormInputGroup.leftAddOn(htmlFactory.glyphicon(Glyphicon.credit_card));
+		
+		eMailFormInputGroup.leftAddOn(htmlFactory.fontAwesome().webApplication(WebApplication.envelope).fixedWidth()); //htmlFactory.fontAwesome().webApplication(WebApplication.envelope));
+				
 //		creditCardGroup.rightPopoverHelpButton(
 //				Placement.BOTTOM, 
 //				"Credit card number", 

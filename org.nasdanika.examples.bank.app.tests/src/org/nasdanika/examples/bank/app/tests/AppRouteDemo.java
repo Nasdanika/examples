@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.fail;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
@@ -29,20 +30,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Description("Demonstrates capabilities of Nasdanika HTML by rendering and taking a screenshot of AppRoute")
 public class AppRouteDemo implements WebTest<WebDriver> {
 	
+	private enum DriverType { firefox, chrome, ie } 
+	
 	private WebDriver driver;
 		
 	@Parameters(name="{index}: {0}")
 	public static Collection<Object[]> registrationData() {
 		List<Object[]> ret = new ArrayList<>();
 		for (Theme theme: Theme.values()) {
-			ret.add(new Object[] { theme });
+			ret.add(new Object[] { DriverType.firefox, theme }); // TODO Add other browsers
 		}
 		return ret;
 	}
 	
-	@Parameter
+	@Parameter(0)
 	@Title("Theme")
 	public Theme theme;		
+	
+	@Parameter(1)
+	public DriverType driverType;
 	
 	@Override
 	public WebDriver getWebDriver() {
@@ -51,8 +57,14 @@ public class AppRouteDemo implements WebTest<WebDriver> {
 
 	@Before
 	public void setUp() throws Exception {
-        driver = new FirefoxDriver(); // new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		switch (driverType) {
+		case firefox:
+	        driver = new FirefoxDriver(); // new ChromeDriver();
+	        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+			break;
+		default:
+			fail("Unsupported driver type: ");		
+		}
 	}
 	
 	@Test
