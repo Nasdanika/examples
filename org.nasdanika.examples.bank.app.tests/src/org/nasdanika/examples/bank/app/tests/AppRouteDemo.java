@@ -44,11 +44,11 @@ public class AppRouteDemo implements WebTest<WebDriver> {
 	}
 	
 	@Parameter(0)
-	@Title("Theme")
-	public Theme theme;		
+	public DriverType driverType;
 	
 	@Parameter(1)
-	public DriverType driverType;
+	@Title("Theme")
+	public Theme theme;		
 	
 	@Override
 	public WebDriver getWebDriver() {
