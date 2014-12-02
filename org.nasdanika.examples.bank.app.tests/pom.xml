@@ -19,24 +19,34 @@
 					<dependencies>						
 						<dependency>
 							<type>eclipse-feature</type>
+							<artifactId>org.nasdanika.cdo.feature</artifactId>
+							<version>0.0.0</version>
+						</dependency>						
+					
+						<dependency>
+							<type>eclipse-feature</type>
+							<artifactId>org.nasdanika.equinox.feature</artifactId>
+							<version>0.0.0</version>
+						</dependency>						
+					
+						<dependency>
+							<type>eclipse-feature</type>
 							<artifactId>org.nasdanika.feature</artifactId>
 							<version>0.0.0</version>
 						</dependency>						
-						<dependency>
-							<type>eclipse-feature</type>
-							<artifactId>org.nasdanika.html.feature</artifactId>
-							<version>0.0.0</version>
-						</dependency>
+					
 						<dependency>
 							<type>eclipse-feature</type>
 							<artifactId>org.nasdanika.server.jetty.feature</artifactId>
 							<version>0.0.0</version>
-						</dependency>
+						</dependency>						
+					
 						<dependency>
 							<type>eclipse-feature</type>
-							<artifactId>org.nasdanika.server.third_party.feature</artifactId>
+							<artifactId>org.nasdanika.webtest.feature</artifactId>
 							<version>0.0.0</version>
-						</dependency>												
+						</dependency>						
+					
 						<dependency>
 							<type>eclipse-feature</type>
 							<artifactId>org.nasdanika.examples.bank.ui.driver.feature</artifactId>
@@ -79,19 +89,15 @@
 							<level>3</level>
 							<autoStart>true</autoStart>
 						</bundle>
-						<!-- 
-						<bundle>
-							<id>org.eclipse.osgi</id>
-							<level>1</level>
-							<autoStart>true</autoStart>
-						</bundle>
-						 -->
 						<bundle>
 							<id>org.nasdanika.examples.bank.app</id>
 							<level>4</level>
 							<autoStart>true</autoStart>
 						</bundle>
 					</bundleStartLevel>
+                    <includes>
+	                    <include>**/BankTest.java</include>
+                    </includes>
 					<argLine>-Xmx512m -Dorg.osgi.service.http.port=8080</argLine>
 				</configuration>
 			</plugin>

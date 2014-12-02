@@ -7,11 +7,11 @@ import org.nasdanika.webtest.Publish;
 import org.nasdanika.webtest.Report;
 import org.nasdanika.webtest.Title;
 
+@SuiteClasses({AppRouteDemo.class,  SignUp.class, SignIn.class})
 @RunWith(NasdanikaWebTestSuite.class)
 @Title("Nasdanika Bank Web Tests Report")
 @Report
 @Publish(url="http://localhost:18080/router/transaction/elements/WebTestHub/L5/testSessions", securityToken="secret")
-@SuiteClasses({AppRouteDemo.class,  SignUp.class, SignIn.class})
 public class BankTest {
 	
 }
