@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="org.nasdanika.examples.target" sequenceNumber="8">
+<?pde version="3.8"?><target includeMode="feature" name="org.nasdanika.examples.target" sequenceNumber="10">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.examples.bank.ui.driver.feature.feature.group" version="0.1.0.201411302304"/>
+<unit id="org.nasdanika.examples.bank.ui.driver.feature.feature.group" version="0.1.0.201412020518"/>
 <repository location="http://www.nasdanika.org/examples-bank-ui-driver/repository"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.nasdanika.feature.feature.group" version="0.1.0.201411302142"/>
-<unit id="org.nasdanika.server.jetty.feature.feature.group" version="0.1.0.201411302142"/>
+<unit id="org.nasdanika.feature.feature.group" version="0.1.0.201412020405"/>
+<unit id="org.nasdanika.server.jetty.feature.feature.group" version="0.1.0.201412020405"/>
 <unit id="org.nasdanika.server.third_party.feature.feature.group" version="0.1.0.201411221747"/>
-<unit id="org.nasdanika.html.feature.feature.group" version="1.2.0.201411302142"/>
-<unit id="org.nasdanika.equinox.feature.feature.group" version="0.1.0.201411302142"/>
-<unit id="org.nasdanika.cdo.feature.feature.group" version="0.1.0.201411302142"/>
-<unit id="org.nasdanika.webtest.feature.feature.group" version="0.1.0.201411302142"/>
+<unit id="org.nasdanika.html.feature.feature.group" version="1.2.0.201412020405"/>
+<unit id="org.nasdanika.equinox.feature.feature.group" version="0.1.0.201412020405"/>
+<unit id="org.nasdanika.cdo.feature.feature.group" version="0.1.0.201412020405"/>
+<unit id="org.nasdanika.webtest.feature.feature.group" version="0.1.0.201412020405"/>
 <repository location="http://www.nasdanika.org/server/repository"/>
 </location>
 </locations>
