@@ -34,11 +34,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignIn implements WebTest<WebDriver> {
 	
-	public enum Browser { firefox, chrome, iexplorer }
+	public enum Browser { firefox, chrome , iexplorer }
 	
 	@Parameters(name="{index}: {0}")
 	public static Collection<Object[]> registrationData() {
-		return Arrays.asList(new Object[][] { {Browser.firefox} /*, {Browser.chrome}, {Browser.iexplorer} */ });
+		return Arrays.asList(new Object[][] { {Browser.firefox} , {Browser.chrome} /*, {Browser.iexplorer} */ });
 	}
 	
 	@Parameter
@@ -80,7 +80,7 @@ public class SignIn implements WebTest<WebDriver> {
 	public void _SignUpCustomer() throws Exception {
 		Guest guest = actorFactory.createGuest(getWebDriver());
 		guest.goHome();
-		Actor<WebDriver> customer = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
+		Actor<WebDriver> customer = guest.signUp(TEST_ONLINE_ID+"_"+browser, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
 		Assert.assertTrue(customer instanceof Customer);
 		Assert.assertTrue(customer.getCurrentPage() instanceof CustomerHome);
 		Assert.assertEquals(TEST_CUSTOMER_NAME, ((CustomerHome) customer.getCurrentPage()).getBanner());
@@ -93,7 +93,7 @@ public class SignIn implements WebTest<WebDriver> {
 	public void signIn() throws Exception {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID, TEST_PASSWORD);	
+		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID+"_"+browser, TEST_PASSWORD);	
 		Assert.assertTrue(actor instanceof Customer);
 		Assert.assertTrue(actor.getCurrentPage() instanceof CustomerHome);
 		Assert.assertEquals(TEST_CUSTOMER_NAME, ((CustomerHome) actor.getCurrentPage()).getBanner());
@@ -104,7 +104,7 @@ public class SignIn implements WebTest<WebDriver> {
 	public void invalidCredentials() {
 		Guest guest = actorFactory.createGuest(driver);
 		guest.goHome();
-		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID, TEST_PASSWORD+"_1234");	
+		Actor<WebDriver> actor = guest.signIn(TEST_ONLINE_ID+"_"+browser, TEST_PASSWORD+"_1234");	
 		Assert.assertTrue(actor instanceof Guest);
 		Assert.assertTrue(actor.getCurrentPage() instanceof SignInFailedDialog);
 	}

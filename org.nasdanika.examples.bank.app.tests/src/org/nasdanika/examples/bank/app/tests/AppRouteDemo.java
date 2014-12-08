@@ -1,7 +1,8 @@
 package org.nasdanika.examples.bank.app.tests;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -9,11 +10,9 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.fail;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.nasdanika.examples.bank.app.tests.SignIn.Browser;
 import org.nasdanika.html.Theme;
 import org.nasdanika.webtest.Description;
 import org.nasdanika.webtest.NasdanikaParameterizedWebTestRunner;
@@ -22,6 +21,7 @@ import org.nasdanika.webtest.Title;
 import org.nasdanika.webtest.WebTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,16 +30,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Description("Demonstrates capabilities of Nasdanika HTML by rendering and taking a screenshot of AppRoute")
 public class AppRouteDemo implements WebTest<WebDriver> {
 	
-	private enum DriverType { firefox, chrome, ie } 
+	private enum DriverType { firefox, chrome /*, ie */ } 
 	
 	private WebDriver driver;
 		
 	@Parameters(name="{index}: {0}")
-	public static Collection<Object[]> registrationData() {
+	public static Collection<Object[]> parameters() {
 		List<Object[]> ret = new ArrayList<>();
 		for (Theme theme: Theme.values()) {
-			ret.add(new Object[] { DriverType.firefox, theme }); // TODO Add other browsers
+			for (DriverType driverType : DriverType.values()) {
+				ret.add(new Object[] { driverType, theme }); 
+			}
 		}
+//		ret.add(new Object[] { DriverType.chrome, Theme.Default }); // For quick testing. 
 		return ret;
 	}
 	
@@ -60,11 +63,14 @@ public class AppRouteDemo implements WebTest<WebDriver> {
 		switch (driverType) {
 		case firefox:
 	        driver = new FirefoxDriver(); // new ChromeDriver();
-	        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+			break;
+		case chrome:
+	        driver = new ChromeDriver();
 			break;
 		default:
 			fail("Unsupported driver type: ");		
 		}
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 	}
 	
 	@Test
