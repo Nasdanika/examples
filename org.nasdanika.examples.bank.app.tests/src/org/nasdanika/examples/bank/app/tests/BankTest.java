@@ -7,8 +7,9 @@ import org.nasdanika.webtest.Publish;
 import org.nasdanika.webtest.Report;
 import org.nasdanika.webtest.Title;
 
-//@SuiteClasses({SignUpHappyPath.class})
-@SuiteClasses({AppRouteDemo.class,  SignUp.class, SignIn.class})
+@SuiteClasses({SignUpHappyPath.class})
+//@SuiteClasses({SignUpHappyPath.class, SubSuite.class})
+//@SuiteClasses({AppRouteDemo.class,  SignUp.class, SignIn.class})
 @RunWith(NasdanikaWebTestSuite.class)
 @Title("Nasdanika Bank Web Tests Report")
 @Report

@@ -11,6 +11,7 @@ import org.nasdanika.html.Button;
 import org.nasdanika.html.Carousel;
 import org.nasdanika.html.FontAwesome.WebApplication;
 import org.nasdanika.html.Form;
+import org.nasdanika.html.Tag.TagName;
 import org.nasdanika.html.Theme;
 import org.nasdanika.html.FormGroup.Status;
 import org.nasdanika.html.FormInputGroup;
@@ -23,7 +24,7 @@ import org.nasdanika.html.Modal;
 import org.nasdanika.html.Navbar;
 import org.nasdanika.html.Table;
 import org.nasdanika.html.Table.Row;
-import org.nasdanika.html.UIElement.Color;
+import org.nasdanika.html.UIElement.BootstrapColor;
 import org.nasdanika.html.UIElement.DeviceSize;
 import org.nasdanika.html.UIElement.Event;
 import org.nasdanika.html.UIElement.Size;
@@ -164,7 +165,7 @@ public class AppRoute implements Route {
 		
 		appPanel.contentPanel(body).width(DeviceSize.LARGE, 8);
 		
-		body.content(htmlFactory.tag("div", "").style("min-height", "200px"));
+		body.content(htmlFactory.div().style("min-height", "200px"));
 		
 		Modal modal = htmlFactory.modal()
 				.title("Hello")
@@ -174,7 +175,7 @@ public class AppRoute implements Route {
 		
 		body.content(modal, modal.bind(htmlFactory.button("Open dialog")));
 		
-		body.content(htmlFactory.tag("div", "").style("min-height", "200px"));		
+		body.content(htmlFactory.div("").style("min-height", "200px"));		
 		
 		body.content(htmlFactory.inject("#side-panel", "Hello!"));
 		
@@ -281,7 +282,7 @@ public class AppRoute implements Route {
 						htmlFactory.label(Style.SUCCESS, "Life is good!").id("life_is_good"),
 						HTMLFactory.Placement.BOTTOM,
 						"A <B>good</B> life is even <U>better</U>!!!"));
-		body.content(htmlFactory.tag("script", "$('#life_is_good').tooltip({html:true});"));
+		body.content(htmlFactory.tag(TagName.script, "$('#life_is_good').tooltip({html:true});"));
 		
 		
 		body.content("<p/>");
@@ -298,7 +299,7 @@ public class AppRoute implements Route {
 		body.content("<p/>");
 		
 		Table transactionTable = htmlFactory.table();//.bordered();
-		Row headerRow = transactionTable.row().background(Color.INFO);
+		Row headerRow = transactionTable.row().background(BootstrapColor.INFO);
 		headerRow.header(htmlFactory.glyphicon(Glyphicon.calendar), " Date");
 		headerRow.header("Description");
 		headerRow.header(htmlFactory.glyphicon(Glyphicon.usd), " Amount");

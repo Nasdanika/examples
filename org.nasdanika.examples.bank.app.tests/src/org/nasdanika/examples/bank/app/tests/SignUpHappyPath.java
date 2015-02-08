@@ -20,7 +20,7 @@ import org.nasdanika.webtest.NasdanikaWebTestRunner;
 import org.nasdanika.webtest.Screenshot;
 import org.nasdanika.webtest.WebTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 @RunWith(NasdanikaWebTestRunner.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -28,8 +28,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class SignUpHappyPath implements WebTest<WebDriver> {
 	
 	private static final String TEST_PASSWORD = "J123_D45";
-	private static final String TEST_CUSTOMER_NAME = "John Doe";
-	private static final String TEST_ONLINE_ID = "jDoe";
+	private static final String TEST_CUSTOMER_NAME = "John H. Doe";
+	private static final String TEST_ONLINE_ID = "aHappyJohnDoe";
 	private WebDriver driver;
 	
 	@Override
@@ -42,7 +42,7 @@ public class SignUpHappyPath implements WebTest<WebDriver> {
 
 	@Before
 	public void setUp() throws Exception {
-        driver = new FirefoxDriver(); // new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
 	}
 	
@@ -53,6 +53,7 @@ public class SignUpHappyPath implements WebTest<WebDriver> {
 		Guest guest = actorFactory.createGuest(getWebDriver());
 		guest.goHome();
 		Actor<WebDriver> customer = guest.signUp(TEST_ONLINE_ID, TEST_CUSTOMER_NAME, TEST_PASSWORD, TEST_PASSWORD);
+		//Assert.fail("For testing");
 		Assert.assertTrue(customer instanceof Customer);
 		Assert.assertTrue(customer.getCurrentPage() instanceof CustomerHome);
 		Assert.assertEquals(TEST_CUSTOMER_NAME, ((CustomerHome) customer.getCurrentPage()).getBanner());

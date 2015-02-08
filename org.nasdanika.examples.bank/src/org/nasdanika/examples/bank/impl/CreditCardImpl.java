@@ -109,7 +109,9 @@ public class CreditCardImpl extends LoanAccountImpl implements CreditCard {
 		minPaymentRow.cell(getBalance().negate().divide(new BigDecimal("100")));
 		
 		Select statementSelect = htmlFactory
-				.select("selectStatement", "selectStatement", "Select statement period")
+				.select()
+				.name("selectStatement")
+				.id("selectStatement")				
 				.style("float", "right")
 				.on(Event.change, "nsdReplaceWith($('#transactions'), this.value)");
 		
