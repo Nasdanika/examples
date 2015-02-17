@@ -20,6 +20,7 @@ import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.cdo.security.SecurityPackage;
 import org.nasdanika.cdo.security.SecurityPolicy;
+import org.nasdanika.cdo.security.impl.LoginUserImpl;
 import org.nasdanika.core.AuthorizationProvider.AccessDecision;
 import org.nasdanika.core.Context;
 import org.nasdanika.examples.bank.Account;
@@ -53,12 +54,7 @@ import org.nasdanika.web.RouteMethod;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getMemberOf <em>Member Of</em>}</li>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getPermissions <em>Permissions</em>}</li>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getProtectionDomain <em>Protection Domain</em>}</li>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getLogin <em>Login</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getPasswordHash <em>Password Hash</em>}</li>
- *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#isDisabled <em>Disabled</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getAccounts <em>Accounts</em>}</li>
  *   <li>{@link org.nasdanika.examples.bank.impl.CustomerImpl#getName <em>Name</em>}</li>
  * </ul>
@@ -66,7 +62,7 @@ import org.nasdanika.web.RouteMethod;
  *
  * @generated
  */
-public class CustomerImpl extends CDOObjectImpl implements Customer {
+public class CustomerImpl extends LoginUserImpl implements Customer {
 	private static final String UTF_8 = "UTF_8";
 
 	/**
@@ -86,36 +82,6 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	@Override
 	protected EClass eStaticClass() {
 		return BankPackage.Literals.CUSTOMER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected int eStaticFeatureCount() {
-		return 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	public EList<Group> getMemberOf() {
-		return (EList<Group>)eGet(SecurityPackage.Literals.PRINCIPAL__MEMBER_OF, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	public EList<Permission> getPermissions() {
-		return (EList<Permission>)eGet(SecurityPackage.Literals.PRINCIPAL__PERMISSIONS, true);
 	}
 
 	/**
@@ -160,24 +126,6 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLogin() {
-		return (String)eGet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__LOGIN, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLogin(String newLogin) {
-		eSet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__LOGIN, newLogin);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public byte[] getPasswordHash() {
 		return (byte[])eGet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH, true);
 	}
@@ -191,57 +139,6 @@ public class CustomerImpl extends CDOObjectImpl implements Customer {
 		eSet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH, newPasswordHash);
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isDisabled() {
-		return (Boolean)eGet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__DISABLED, true);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDisabled(boolean newDisabled) {
-		eSet(SecurityPackage.Literals.LOGIN_PASSWORD_HASH_USER__DISABLED, newDisabled);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void sendMessage(Principal from, String subject, String bodyMimeType, Object body) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void sendMessage(Principal from, String subject, Map<String, Object> bodyMap) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void sendMessage(Principal from, String subject, String body) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
 	private AuthorizationHelper authorizationHelper = new AuthorizationHelper(this);
 	
 	/**

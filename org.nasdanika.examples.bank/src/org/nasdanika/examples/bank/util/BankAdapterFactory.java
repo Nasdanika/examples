@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.nasdanika.cdo.security.ActionContainer;
 import org.nasdanika.cdo.security.LoginPasswordHashUser;
 import org.nasdanika.cdo.security.LoginPasswordProtectionDomain;
+import org.nasdanika.cdo.security.LoginUser;
 import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.cdo.security.User;
@@ -149,6 +150,10 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseUser(User object) {
 				return createUserAdapter();
+			}
+			@Override
+			public Adapter caseLoginUser(LoginUser object) {
+				return createLoginUserAdapter();
 			}
 			@Override
 			public Adapter caseLoginPasswordHashUser(LoginPasswordHashUser object) {
@@ -451,6 +456,20 @@ public class BankAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.nasdanika.cdo.security.LoginUser <em>Login User</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.nasdanika.cdo.security.LoginUser
+	 * @generated
+	 */
+	public Adapter createLoginUserAdapter() {
 		return null;
 	}
 

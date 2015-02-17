@@ -12,7 +12,6 @@ import org.eclipse.emf.cdo.CDOLock;
 import org.eclipse.emf.cdo.view.CDOView;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
 import org.nasdanika.cdo.CDOViewContext;
 import org.nasdanika.cdo.security.AuthorizationHelper;
@@ -317,7 +316,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	@RouteMethod(value=RequestMethod.POST)
 	public Object signin(final HttpContext context) throws Exception {
 		@SuppressWarnings("unchecked")
-		Principal authenticatedPrincipal = ((CDOViewContext<?,LoginPasswordCredentials>) context).authenticate(new LoginPasswordCredentials() {
+		Principal authenticatedPrincipal = ((CDOViewContext<?,LoginPasswordCredentials,HttpContext>) context).authenticate(new LoginPasswordCredentials() {
 			
 			@Override
 			public String getPassword() {
@@ -401,7 +400,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 				
 				((CustomerImpl) newCustomer).init();
 				
-				Principal authenticatedUser = ((CDOViewContext<CDOView, LoginPasswordCredentials>) context).authenticate(new LoginPasswordCredentials() {
+				Principal authenticatedUser = ((CDOViewContext<CDOView, LoginPasswordCredentials,HttpContext>) context).authenticate(new LoginPasswordCredentials() {
 					
 					@Override
 					public String getPassword() {

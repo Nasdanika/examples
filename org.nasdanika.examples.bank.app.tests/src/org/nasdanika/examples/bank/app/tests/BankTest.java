@@ -13,7 +13,7 @@ import org.nasdanika.webtest.Title;
 @RunWith(NasdanikaWebTestSuite.class)
 @Title("Nasdanika Bank Web Tests Report")
 @Report
-@Publish(url="http://localhost:18080/router/transaction/elements/WebTestHub/L7/testSessions", securityToken="secret")
+@Publish(url="http://localhost:18080/router/transaction/elements/WebTestHub/L8/testSessions", securityToken="secret")
 public class BankTest {
 	
 }

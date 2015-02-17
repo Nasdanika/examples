@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.nasdanika.cdo.security.ActionContainer;
 import org.nasdanika.cdo.security.LoginPasswordHashUser;
 import org.nasdanika.cdo.security.LoginPasswordProtectionDomain;
+import org.nasdanika.cdo.security.LoginUser;
 import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.cdo.security.User;
@@ -83,6 +84,7 @@ public class BankSwitch<T> extends Switch<T> {
 				Customer customer = (Customer)theEObject;
 				T result = caseCustomer(customer);
 				if (result == null) result = caseLoginPasswordHashUser(customer);
+				if (result == null) result = caseLoginUser(customer);
 				if (result == null) result = caseUser(customer);
 				if (result == null) result = casePrincipal(customer);
 				if (result == null) result = defaultCase(theEObject);
@@ -481,6 +483,21 @@ public class BankSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUser(User object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Login User</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Login User</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLoginUser(LoginUser object) {
 		return null;
 	}
 

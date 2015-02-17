@@ -219,15 +219,6 @@ public interface BankPackage extends EPackage {
 	int CUSTOMER__LOGIN = SecurityPackage.LOGIN_PASSWORD_HASH_USER__LOGIN;
 
 	/**
-	 * The feature id for the '<em><b>Password Hash</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER__PASSWORD_HASH = SecurityPackage.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH;
-
-	/**
 	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -235,6 +226,15 @@ public interface BankPackage extends EPackage {
 	 * @ordered
 	 */
 	int CUSTOMER__DISABLED = SecurityPackage.LOGIN_PASSWORD_HASH_USER__DISABLED;
+
+	/**
+	 * The feature id for the '<em><b>Password Hash</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER__PASSWORD_HASH = SecurityPackage.LOGIN_PASSWORD_HASH_USER__PASSWORD_HASH;
 
 	/**
 	 * The feature id for the '<em><b>Accounts</b></em>' containment reference list.

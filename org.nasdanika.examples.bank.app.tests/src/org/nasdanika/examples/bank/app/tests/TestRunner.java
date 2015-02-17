@@ -22,7 +22,7 @@ public class TestRunner implements IApplication {
         
         //System.out.println(result);
         
-        return EXIT_OK;
+        return result.getFailureCount()==0 ? 0 : 1;
 	}
 
 	@Override
