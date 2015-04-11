@@ -10,7 +10,9 @@
    		target="(component.name=credit_cards_repository)" 
    		unbind="removeRepository"/>
    	
-   <property name=".acceptors" type="String" value="jvm:credit_cards"/>
+   <property name=".acceptors" type="String">jvm:credit_cards
+tcp:
+   </property>
    <property name=".repositoryName" type="String" value="credit_cards"/>
    <property name=".connector" type="String" value="jvm:credit_cards"/>
    <service>

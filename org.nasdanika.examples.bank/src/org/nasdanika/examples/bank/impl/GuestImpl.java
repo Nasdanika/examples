@@ -316,7 +316,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 	@RouteMethod(value=RequestMethod.POST)
 	public Object signin(final HttpContext context) throws Exception {
 		@SuppressWarnings("unchecked")
-		Principal authenticatedPrincipal = ((CDOViewContext<?,LoginPasswordCredentials,HttpContext>) context).authenticate(new LoginPasswordCredentials() {
+		Principal authenticatedPrincipal = ((CDOViewContext<?,LoginPasswordCredentials>) context).authenticate(new LoginPasswordCredentials() {
 			
 			@Override
 			public String getPassword() {
@@ -400,7 +400,7 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 				
 				((CustomerImpl) newCustomer).init();
 				
-				Principal authenticatedUser = ((CDOViewContext<CDOView, LoginPasswordCredentials,HttpContext>) context).authenticate(new LoginPasswordCredentials() {
+				Principal authenticatedUser = ((CDOViewContext<CDOView, LoginPasswordCredentials>) context).authenticate(new LoginPasswordCredentials() {
 					
 					@Override
 					public String getPassword() {

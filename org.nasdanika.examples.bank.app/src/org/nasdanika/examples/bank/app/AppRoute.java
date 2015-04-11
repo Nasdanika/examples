@@ -42,7 +42,7 @@ import org.nasdanika.web.WebContext;
 public class AppRoute implements Route {
 
 	@Override
-	public Action execute(WebContext context) throws Exception {
+	public Action execute(WebContext context, Object... args) throws Exception {
 		final HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 		
 		ApplicationPanel appPanel = htmlFactory.applicationPanel()

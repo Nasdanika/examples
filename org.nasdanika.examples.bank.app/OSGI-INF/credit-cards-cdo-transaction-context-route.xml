@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.nasdanika.examples.bank.app">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="Transaction Context Route">
    <implementation class="org.nasdanika.cdo.web.CDOViewContextAutocloseRouteComponent"/>
    <property name="pattern" type="String" value="nasdanika(\..+)?(/.+)?"/>
    <property name="method" type="String" value="GET"/>

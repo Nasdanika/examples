@@ -8,7 +8,7 @@ import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.examples.bank.LoginPasswordCredentials;
 import org.nasdanika.web.HttpContext;
 
-public class SystemOfRecordsCDOTransactionContextProviderComponent extends CDOTransactionContextProviderComponent<LoginPasswordCredentials, HttpContext> {
+public class SystemOfRecordsCDOTransactionContextProviderComponent extends CDOTransactionContextProviderComponent<LoginPasswordCredentials> {
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -13,7 +13,7 @@ import org.nasdanika.web.WebContext;
 public class HomeRoute implements Route {
 
 	@Override
-	public Action execute(WebContext context) throws Exception {
+	public Action execute(WebContext context, Object... args) throws Exception {
 		final HTMLFactory htmlFactory = context.adapt(HTMLFactory.class);
 				
 		final AutoCloseable app = 

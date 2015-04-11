@@ -220,7 +220,7 @@ public class SystemOfRecordsImpl extends LoginPasswordProtectionDomainImpl imple
 	@RouteMethod(pattern="[^/]+\\.html")
 	public void home(HttpContext context) throws Exception {
 		@SuppressWarnings("unchecked")
-		Principal principal = ((CDOViewContext<?,?,HttpContext>) context).getPrincipal(context);
+		Principal principal = ((CDOViewContext<?,?>) context).getPrincipal();
 		context.getResponse().sendRedirect(context.getObjectPath(principal)+".html");
 	}	
 
