@@ -16,5 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.osgi.services;bundle-version="3.3.100",
  org.nasdanika.cdo;bundle-version="0.1.0",
  org.nasdanika.cdo.security;bundle-version="0.1.0";visibility:=reexport,
- org.apache.commons.lang3;bundle-version="3.3.2"
+ org.apache.commons.lang3;bundle-version="3.3.2",
+ org.nasdanika.cdo.scheduler,
+ org.nasdanika.cdo.function;bundle-version="0.1.0"
 Bundle-ActivationPolicy: lazy

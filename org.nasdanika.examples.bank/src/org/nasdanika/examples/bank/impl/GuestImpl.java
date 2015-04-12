@@ -9,11 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.cdo.CDOLock;
+import org.eclipse.emf.cdo.CDOObject;
 import org.eclipse.emf.cdo.view.CDOView;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.internal.cdo.CDOObjectImpl;
+import org.nasdanika.cdo.CDOTransactionContext;
+import org.nasdanika.cdo.CDOTransactionContextCommand;
 import org.nasdanika.cdo.CDOViewContext;
+import org.nasdanika.cdo.function.CDOFunctionFactory;
+import org.nasdanika.cdo.scheduler.Scheduler;
 import org.nasdanika.cdo.security.AuthorizationHelper;
 import org.nasdanika.cdo.security.Group;
 import org.nasdanika.cdo.security.LoginPasswordCredentials;
@@ -33,6 +38,8 @@ import org.nasdanika.examples.bank.Customer;
 import org.nasdanika.examples.bank.Guest;
 import org.nasdanika.examples.bank.Product;
 import org.nasdanika.examples.bank.SystemOfRecords;
+import org.nasdanika.function.Function;
+import org.nasdanika.function.cdo.CDOTransactionContextFunction;
 import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.ApplicationPanel.ContentPanel;
 import org.nasdanika.html.Button.Type;
@@ -428,6 +435,24 @@ public class GuestImpl extends CDOObjectImpl implements Guest {
 		context.getResponse().sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, "Cannot acquire a write lock");
 		return null;			
 	}	
+		
+	@RouteMethod
+	@SuppressWarnings("unchecked")
+	public String test(HttpContext context) throws Exception {
+		CDOTransactionContext<LoginPasswordCredentials> cdoContext = context.adapt(CDOTransactionContext.class);
+		Principal principal = cdoContext.getPrincipal();
+		System.out.println("In test method "+principal.cdoID());
+		
+		Scheduler<LoginPasswordCredentials, CDOObject> scheduler = context.adapt(Scheduler.class);
+		CDOFunctionFactory<LoginPasswordCredentials> functionFactory = new CDOFunctionFactory<LoginPasswordCredentials>(cdoContext, principal);
+		CDOTransactionContextFunction<LoginPasswordCredentials, Object, Object> command = functionFactory.createObjectMethodFunction(this, "invokeMe", String.class);
+		CDOObject task = scheduler.schedule(command.bind(cdoContext, "Tarapunka"), 1, TimeUnit.MINUTES);
+		return String.valueOf(task);
+	}
 	
+	public void invokeMe(String arg) {
+		System.out.println("I was invoked : "+arg);
+		
+	}
 
 } //GuestImpl

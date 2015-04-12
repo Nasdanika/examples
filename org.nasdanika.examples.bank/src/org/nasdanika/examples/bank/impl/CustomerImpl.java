@@ -11,11 +11,9 @@ import java.util.Random;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.internal.cdo.CDOObjectImpl;
+import org.nasdanika.cdo.CDOTransactionContext;
+import org.nasdanika.cdo.scheduler.Scheduler;
 import org.nasdanika.cdo.security.AuthorizationHelper;
-import org.nasdanika.cdo.security.Group;
-import org.nasdanika.cdo.security.Permission;
 import org.nasdanika.cdo.security.Principal;
 import org.nasdanika.cdo.security.ProtectionDomain;
 import org.nasdanika.cdo.security.SecurityPackage;
@@ -36,11 +34,11 @@ import org.nasdanika.html.ApplicationPanel;
 import org.nasdanika.html.ApplicationPanel.ContentPanel;
 import org.nasdanika.html.Fragment;
 import org.nasdanika.html.HTMLFactory;
-import org.nasdanika.html.Theme;
 import org.nasdanika.html.HTMLFactory.Glyphicon;
 import org.nasdanika.html.Navbar;
 import org.nasdanika.html.Table;
 import org.nasdanika.html.Table.Row;
+import org.nasdanika.html.Theme;
 import org.nasdanika.html.UIElement.DeviceSize;
 import org.nasdanika.html.UIElement.Event;
 import org.nasdanika.html.UIElement.Style;
@@ -378,6 +376,5 @@ public class CustomerImpl extends LoginUserImpl implements Customer {
 			}
 		}				
 	}
-	
 
 } //CustomerImpl

@@ -10,6 +10,8 @@ import org.eclipse.emf.cdo.transaction.CDOTransaction;
 import org.eclipse.emf.cdo.transaction.CDOTransactionHandler2;
 import org.eclipse.emf.cdo.util.CommitException;
 import org.nasdanika.cdo.CDOSessionInitializer;
+import org.nasdanika.cdo.function.FunctionPackage;
+import org.nasdanika.cdo.scheduler.SchedulerPackage;
 import org.nasdanika.cdo.security.Permission;
 import org.nasdanika.cdo.security.SecurityFactory;
 import org.nasdanika.cdo.security.SecurityPackage;
@@ -26,6 +28,7 @@ public class CreditCardsSessionInitializerComponent implements CDOSessionInitial
 		CDOPackageRegistry packageRegistry = session.getPackageRegistry();
 		packageRegistry.putEPackage(BankPackage.eINSTANCE);
 		packageRegistry.putEPackage(SecurityPackage.eINSTANCE);
+		packageRegistry.putEPackage(FunctionPackage.eINSTANCE);
 		
 		// Populate with sample data if empty.
 		CDOTransaction transaction = session.openTransaction();
